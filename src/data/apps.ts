@@ -1,4 +1,4 @@
-import { User, Zap, Folder, Mail } from "lucide-react"
+import { User, Zap, Folder, Mail, Code2 } from "lucide-react"
 import { GithubIcon } from "../components/GithubIcon"
 import type { Language } from "../App"
 
@@ -13,5 +13,6 @@ export const apps: AppData[] = [
     {id: "skills", icon: Zap, label: {pt:"Habilidades", en: "Skills"} },
     {id: "projects", icon: Folder, label:{pt: "Projetos", en: "Projects"} },
     {id: "contact", icon: Mail, label: {pt:"Contato", en: "Contact"} },
+    {id: "Services", icon: Code2, label: {pt: "Serviços", en: "Services"} },
     {id: "github", icon: GithubIcon, label: {pt: "Github", en: "Github"}}
 ]

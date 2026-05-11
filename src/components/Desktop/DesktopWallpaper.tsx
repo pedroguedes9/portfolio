@@ -1,6 +1,7 @@
 import type { Language } from "../../App";
 import { translations } from "../../data/translations";
-import { HeadlineReveal } from "../headlineReveal";
+import { HeadlineReveal } from "../HeadlineReveal";
+
 
 type DesktopWallpaperProps = {
     name: string;

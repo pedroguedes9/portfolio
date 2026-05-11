@@ -35,13 +35,14 @@ export const AppIcon = ({id, icon:Icon, label, onOpen, status, appIconRef, curre
             to-white/2 rounded-2xl border-t border-white/10 relative overflow-hidden focus-visible:outline
             focus-visible:outline-violet-300/50 hover:border-violet-300/30 hover:scale-105 transition-all duration-300
             ${currentStatusStyle}
+            will-change-transform transform-gpu backface-hidden
             `}
             id={id}>
                 <div className='opacity-0 bg-linear-to-b from-violet-400/18 via-indigo-500/8 to-transparent pointer-events-none absolute inset-0 group-hover:opacity-100 transition-opacity duration-300'></div>
                 <div className='absolute inset-x-0 top-0 h-1/2 bg-linear-to-b from-white/4 to-transparent pointer-events-none'></div>
                 <div className='z-10 flex flex-col justify-center items-center'>
                     <Icon size={46}></Icon>
-                    <p className='text-xs text-white/70' lang={currentLanguage}>{label}</p>
+                    <p className='text-xs text-white/70 antialiased' lang={currentLanguage}>{label}</p>
                 </div>
             </button>
             <div className={`h-1.5 w-1.5 rounded-full ${currentDotStyles}`} ></div>

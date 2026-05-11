@@ -6,6 +6,7 @@ import AppWindow from "../AppWindow/AppWindow"
 import { apps } from "../../data/apps"
 import { AnimatePresence } from "motion/react"
 import type { Language } from "../../App"
+import { AboutMe } from "../AppWindow/content/AboutMe"
 
 
 export type WindowState = {
@@ -26,6 +27,7 @@ export const DesktopWorkspace = ({currentLanguage, onLanguageChange}:DesktopWork
     const containerRef = useRef<HTMLDivElement | null>(null)
     const dockIconRefs = useRef<Record<string, HTMLDivElement | null>>({})
     const [minimizeRequestId, setMinimizeRequestId] = useState(0)
+    const [isMaximized, setIsMaximized] = useState(false)
 
     const registerDockIcon = (id: string, element: HTMLDivElement | null) => {
         dockIconRefs.current[id] = element
@@ -94,7 +96,16 @@ export const DesktopWorkspace = ({currentLanguage, onLanguageChange}:DesktopWork
             }
         })
     }
-    
+
+    const renderAppContent = () => {
+        switch (windowState?.id) {
+            case "about":
+                return <AboutMe currentLanguage={currentLanguage} isMaximized={isMaximized}></AboutMe>
+            default:
+                return null;
+        }
+    }
+
     return (
         <div className="relative flex flex-col justify-center items-center h-screen w-full overflow-hidden" ref={containerRef}>
             <TopBar currentLanguage={currentLanguage} onLanguageChange={onLanguageChange}/>
@@ -112,8 +123,10 @@ export const DesktopWorkspace = ({currentLanguage, onLanguageChange}:DesktopWork
                     getMinimizeTarget={() => getDockIconCenter(windowState.id)}
                     minimizeRequestId={minimizeRequestId}
                     currentLanguage={currentLanguage}
+                    isMaximized={isMaximized}
+                    onMaximizeChange={setIsMaximized}
                     >
-                        {currentLanguage === "pt" ? "Conteúdo em PT" : "Content in EN"}
+                        {renderAppContent()}
                     </AppWindow>
                 }
             </AnimatePresence>

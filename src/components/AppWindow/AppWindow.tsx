@@ -16,11 +16,12 @@ type IndexProps = {
     getMinimizeTarget: () => {x: number, y:number} | null   
     minimizeRequestId: number
     currentLanguage: Language
+    isMaximized: boolean
+    onMaximizeChange: (value:boolean) => void
 }
 
-const AppWindow = ({title, onClose, children, containerRef, onMinimize, initialPosition, onPositionChange, getMinimizeTarget, minimizeRequestId, currentLanguage}:IndexProps) => {
+const AppWindow = ({title, onClose, children, containerRef, onMinimize, initialPosition, onPositionChange, getMinimizeTarget, minimizeRequestId, currentLanguage, isMaximized, onMaximizeChange}:IndexProps) => {
     const dragControls = useDragControls()
-    const [isMaximized, setIsMaximized] = useState(false)
     const x = useMotionValue(initialPosition?.x ?? 0)
     const y = useMotionValue(initialPosition?.y ?? 0)
     const windowRef = useRef<HTMLDivElement | null>(null)
@@ -116,12 +117,12 @@ const AppWindow = ({title, onClose, children, containerRef, onMinimize, initialP
                 },
                 width: {
                     type: "tween",
-                    duration: 0.22,
+                    duration: 0.4,
                     ease: easeInOut
                 },
                 height: {
                     type: "tween",
-                    duration: 0.22,
+                    duration: 0.4,
                     ease: easeInOut
                 }
             } }
@@ -138,7 +139,7 @@ const AppWindow = ({title, onClose, children, containerRef, onMinimize, initialP
                     })
                 } }
             style={{ x, y}}
-            className={` rounded-2xl bg-linear-to-b from-white/10 via-white/5 to-transparent backdrop-blur-lg border-2 border-white/10 shadow-2xl z-40 pointer-events-auto`}>
+            className={` rounded-2xl bg-slate-950/50 bg-linear-to-b from-white/10 via-black/20 to-black/40 backdrop-blur-2xl border-2 border-white/15 shadow-2xl z-40 pointer-events-auto select-none`}>
                 <div className={`relative flex flex-row  p-3 pointer-events-auto ${isMaximized ? "cursor-auto active:cursor-auto" : "cursor-grab active:cursor-grabbing"}`}
                 onPointerDown={
                         (event) => {
@@ -155,7 +156,7 @@ const AppWindow = ({title, onClose, children, containerRef, onMinimize, initialP
                                 x.set(0)
                                 y.set(0)
                             }
-                            setIsMaximized(prev => !prev)
+                            onMaximizeChange(!isMaximized)
                         } }
                         className="w-3 h-3 rounded-full bg-[#28c840] border border-[#1aab29] hover:brightness-90 cursor-pointer" lang={currentLanguage}></button>
                     </div>
@@ -163,7 +164,7 @@ const AppWindow = ({title, onClose, children, containerRef, onMinimize, initialP
                         {title}
                     </h2>
                 </div>
-                <div>
+                <div className={`flex flex-row  h-full justify-center items-center`}>
                     {children}
                 </div>
             </motion.div>
