@@ -1,6 +1,6 @@
 import type React from "react"
 import { easeInOut, motion, useDragControls, useMotionValue } from "motion/react"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react"
 import {animate as animateValue} from "motion/react"
 import { translations } from "../../data/translations"
 import type { Language } from "../../App"
@@ -12,6 +12,7 @@ type IndexProps = {
     containerRef: React.RefObject<HTMLDivElement | null>
     onMinimize: (position: {x: number, y:number}) => void
     initialPosition: {x:number, y:number}
+    sourcePosition: {x:number, y:number} | null
     onPositionChange: (position: {x:number, y:number}) => void
     getMinimizeTarget: () => {x: number, y:number} | null   
     minimizeRequestId: number
@@ -20,15 +21,43 @@ type IndexProps = {
     onMaximizeChange: (value:boolean) => void
 }
 
-const AppWindow = ({title, onClose, children, containerRef, onMinimize, initialPosition, onPositionChange, getMinimizeTarget, minimizeRequestId, currentLanguage, isMaximized, onMaximizeChange}:IndexProps) => {
+const AppWindow = ({title, onClose, children, containerRef, onMinimize, initialPosition,sourcePosition, onPositionChange, getMinimizeTarget, minimizeRequestId, currentLanguage, isMaximized, onMaximizeChange}:IndexProps) => {
     const dragControls = useDragControls()
     const x = useMotionValue(initialPosition?.x ?? 0)
     const y = useMotionValue(initialPosition?.y ?? 0)
     const windowRef = useRef<HTMLDivElement | null>(null)
-    const restorePositionRef = useRef({ x: 0, y: 0 })
+    const restorePositionRef = useRef({ x: initialPosition?.x, y: initialPosition?.y })
     const [isMinimizing, setIsMinimizing] = useState(false)
     const [isShrinking, setIsShrinking] = useState(false)
+    const [isOpeningFromDock, setIsOpeningFromDock] = useState(!!sourcePosition)
     const lastMinimizeRequestId = useRef(minimizeRequestId)
+
+
+    useLayoutEffect(() => {
+        if (!sourcePosition || !windowRef.current) return
+
+        const element = windowRef.current
+        const rect = element.getBoundingClientRect()
+
+        const naturalCenter = {
+            x: rect.left + rect.width / 2 - x.get(), // desconta deslocamentos previos
+            y: rect.top + rect.height / 2 - y.get()
+        }
+        
+        const startDeltaX = sourcePosition.x - naturalCenter.x
+        const startDeltaY = sourcePosition.y - naturalCenter.y
+
+        x.set(startDeltaX)
+        y.set(startDeltaY)
+
+        requestAnimationFrame(() => {
+            animateValue(x, restorePositionRef.current.x, {duration:0.5, ease:easeInOut})
+            animateValue(y, restorePositionRef.current.y, {duration:0.5, ease:easeInOut})
+
+            setTimeout(() => setIsOpeningFromDock(false), 20)
+        })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const  handleMinimizeClick = useCallback(async () => {
         if (isMinimizing) return 
@@ -85,14 +114,21 @@ const AppWindow = ({title, onClose, children, containerRef, onMinimize, initialP
         handleMinimizeClick()
     }, [minimizeRequestId, handleMinimizeClick]) 
 
+    const isTiny = isShrinking || isOpeningFromDock
+
     return (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <motion.div
             ref={windowRef}
-            initial={ { scale:0.92, opacity:0 } }
+            initial={ {
+                scale:sourcePosition? 0.15 : 0.92,
+                opacity: 0,
+                width: isMaximized ? "calc(100vw - 32px)" : "700px",
+                height: isMaximized ? "calc(100vh - 96px)" : "500px"
+            } }
             animate={ {
-                scale: isShrinking ? 0.10 : 1,
-                opacity: isShrinking ? 0 : 1,
+                scale: isTiny ? 0.10 : 1,
+                opacity: isTiny ? 0 : 1,
                 width: isMaximized ? "calc(100vw - 32px)" : "700px",
                 height: isMaximized ? "calc(100vh - 96px)" : "500px"
             } }

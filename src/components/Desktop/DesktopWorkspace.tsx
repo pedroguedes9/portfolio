@@ -17,6 +17,7 @@ export type WindowState = {
         x: number
         y: number
     }
+    sourcePosition?: {x: number, y: number} | null
 } | null
 type DesktopWorkspace = {
     currentLanguage: Language
@@ -39,14 +40,18 @@ export const DesktopWorkspace = ({currentLanguage, onLanguageChange}:DesktopWork
     const handleOpenApp = (id:string) => {
         if (windowState?.id === id && !windowState.isMinimized){
             setMinimizeRequestId(prev => prev + 1)
+            return
         }
+
+        const dockPos = getDockIconCenter(id)
         if (windowState?.id === id && windowState.isMinimized) {
             setWindowState(prev => {
                 if (!prev) return null
 
                 return {
                 ...prev,
-                isMinimized: false
+                isMinimized: false,
+                sourcePosition: dockPos
                 }
             })
             return
@@ -54,7 +59,8 @@ export const DesktopWorkspace = ({currentLanguage, onLanguageChange}:DesktopWork
         setWindowState({
             id,
             isMinimized: false,
-            position:{x: 0 , y: 0}
+            position:{x: 0 , y: 0},
+            sourcePosition: dockPos
         })
     }
 
@@ -122,6 +128,7 @@ export const DesktopWorkspace = ({currentLanguage, onLanguageChange}:DesktopWork
                     containerRef={containerRef}
                     onMinimize={handleMinimize}
                     initialPosition={windowState.position}
+                    sourcePosition={windowState.sourcePosition ?? null}
                     onPositionChange={handlePositionChange}
                     getMinimizeTarget={() => getDockIconCenter(windowState.id)}
                     minimizeRequestId={minimizeRequestId}

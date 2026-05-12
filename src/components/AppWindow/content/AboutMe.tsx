@@ -32,6 +32,17 @@ export const AboutMe = ({currentLanguage, isMaximized}:AboutMeProps) => {
                     <div className={`rounded-full border border-white/10 bg-white/8 px-3 py-1 text-xs text-white/75`}
                     >Python</div>
                 </div>
+                <a
+                href="/curriculo.pdf" 
+                download="Pedro_Guedes_Curriculo.pdf"
+                className={`mt-4 font-medium text-white/90 
+                    bg-violet-600/10 border border-violet-500/40 rounded-lg 
+                    shadow-md shadow-transparent hover:shadow-violet-500/30 hover:bg-violet-600/30 hover:border-violet-400/20 hover:-translate-y-1
+                    transition-all duration-300 ease-in-out
+                    ${isMaximized ? 'py-2 px-10 text-[17px]' : 'py-2 px-8 text-[15px]'}
+                    `}>
+                    Baixar currículo
+                </a>
             </section>
             <section className={`flex flex-col gap-3 max-w-125 transition-all duration-500 ease-in-out
                 ${isMaximized ? 'pt-0' : 'pt-4'}`}>
