@@ -2,12 +2,12 @@
 import type { Language } from "../../../App"
 import { translations } from "../../../data/translations"
 
-type AboutMe = {
+type AboutMeProps = {
     currentLanguage: Language
     isMaximized: boolean
 }
 
-export const AboutMe = ({currentLanguage, isMaximized}:AboutMe) => {
+export const AboutMe = ({currentLanguage, isMaximized}:AboutMeProps) => {
     const firstParagraph = translations[currentLanguage].appWindow.about.firstParagraph
     const secondParagraph = translations[currentLanguage].appWindow.about.secondParagraph
 

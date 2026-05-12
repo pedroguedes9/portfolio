@@ -7,6 +7,7 @@ import { apps } from "../../data/apps"
 import { AnimatePresence } from "motion/react"
 import type { Language } from "../../App"
 import { AboutMe } from "../AppWindow/content/AboutMe"
+import { Skills } from "../AppWindow/content/Skills"
 
 
 export type WindowState = {
@@ -100,7 +101,9 @@ export const DesktopWorkspace = ({currentLanguage, onLanguageChange}:DesktopWork
     const renderAppContent = () => {
         switch (windowState?.id) {
             case "about":
-                return <AboutMe currentLanguage={currentLanguage} isMaximized={isMaximized}></AboutMe>
+                return <AboutMe currentLanguage={currentLanguage} isMaximized={isMaximized}/>
+            case "skills":
+                return <Skills currentLanguage={currentLanguage}/>
             default:
                 return null;
         }
