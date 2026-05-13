@@ -1,5 +1,5 @@
-import type { Language } from "../../../App"
-import { skills } from "../../../data/skills"
+import type { Language } from "../../App"
+import { skills } from "../../data/skills"
 import { 
     MonitorSmartphone, 
     Terminal, 
@@ -61,7 +61,7 @@ export const Skills = ({currentLanguage}: SkillsProps) => {
             {skills.map(category => {
                 const Icon = categoryIcons[category.id]
                 return (
-                    <div className={`flex flex-col gap-2 p-4 min-h-27.5 max-w-5xl shadow-md bg-white/5 border  rounded-2xl  backdrop-blur-sm hover:border-violet-300/25 hover:bg-white/7 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 ${category.id === "deepening" ? 'border-dashed border-indigo-500/6' : 'border-white/10'}`} key={category.id}>
+                    <section className={`flex flex-col gap-2 p-4 min-h-27.5 max-w-5xl shadow-md bg-white/5 border  rounded-2xl  backdrop-blur-sm hover:border-violet-300/25 hover:bg-white/7 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 ${category.id === "deepening" ? 'border-dashed border-indigo-500/6' : 'border-white/10'}`} key={category.id}>
                         <h2 className="flex items-center justify-center gap-2 text-sm font-semibold text-center uppercase tracking-wide text-white/90">
                             {Icon && <Icon size={16} className="text-violet-400"/>}
                             {category.title[currentLanguage]}
@@ -77,7 +77,7 @@ export const Skills = ({currentLanguage}: SkillsProps) => {
                                 )
                             })}
                         </div>
-                    </div>
+                    </section>
                 )
             })}
         </div>

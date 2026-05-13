@@ -1,6 +1,6 @@
 
-import type { Language } from "../../../App"
-import { translations } from "../../../data/translations"
+import type { Language } from "../../App"
+import { translations } from "../../data/translations"
 
 type AboutMeProps = {
     currentLanguage: Language
