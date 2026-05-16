@@ -2,6 +2,7 @@ import { useState } from "react"
 import { projects } from "../../../data/projects"
 import type { Language } from "../../../App"
 import { ProjectCard } from "./ProjectCard"
+import { SiGithub } from "react-icons/si"
 
 type Filter = {
     id: FilterId, label: {pt: string, en: string } 
@@ -34,27 +35,38 @@ export const ProjectsContent = ({currentLanguage}:ProjectsContentProps) => {
     })
 
     return (
-        <div className="flex-1 flex flex-col p-5 gap-4 overflow-hidden">
-            <section className="flex gap-2 flex-wrap shrink-0">
-                {filters.map(filter => {
-                    const isActive = activeFilter === filter.id
-                    return (
-                        <button 
-                        onClick={() => setActiveFilter(filter.id)} 
-                        className={`shadow-lg px-4 py-1.5 text-sm rounded-full cursor-pointer 
-                        ${isActive 
-                            ? 'bg-violet-400/20 border border-violet-300/30 text-white shadow-violet-500/10 scale-103 hover:brightness-110 hover:border-violet-300/50' 
-                            : 'bg-white/6 border border-white/10 text-white/70 hover:bg-white/10 hover:border-white/20 hover:text-white'
-                        }
-                        transition-all duration-300`}
-                        key={filter.id}
-                        >
-                            {filter.label[currentLanguage]}
-                        </button>
-                    )
-                })}
+        <div className="relative flex-1 flex flex-col p-5 gap-4 overflow-hidden">
+            <section className="flex flex-row justify-between items-center">
+                <div className="flex gap-2 flex-wrap shrink-0">
+                    {filters.map(filter => {
+                        const isActive = activeFilter === filter.id
+                        return (
+                            <button
+                            onClick={() => setActiveFilter(filter.id)}
+                            className={`shadow-lg px-4 py-1.5 text-sm rounded-full cursor-pointer
+                            ${isActive
+                                ? 'bg-violet-400/20 border border-violet-300/30 text-white shadow-violet-500/10 scale-103 hover:brightness-110 hover:border-violet-300/50'
+                                : 'bg-white/6 border border-white/10 text-white/70 hover:bg-white/10 hover:border-white/20 hover:text-white'
+                            }
+                            transition-all duration-300`}
+                            key={filter.id}
+                            >
+                                {filter.label[currentLanguage]}
+                            </button>
+                        )
+                    })}
+                </div>
+                <a 
+                href="https://github.com/pedroguedes9"
+                target="_blank"
+                className=" flex justify-center items-center gap-1 backdrop-blur-none bg-black/40 border border-white/10 text-white/80 text-sm px-5 py-2
+                rounded-full hover:bg-black/60 hover:text-white transition-all shadow-lg hover:border-white/20 pointer-events-auto"
+                    >
+                        <SiGithub size={12}/>
+                        Ver todos os projetos no github
+                </a>    
             </section>
-            <section className="flex-1 overflow-x-auto flex flex-col gap-2">
+            <section className="flex-1 overflow-y-auto flex flex-col gap-2 p-1">
                 {filteredProjects.map(project => (
                     <ProjectCard key={project.id} currentLanguage={currentLanguage} project={project}/>
                 ))}

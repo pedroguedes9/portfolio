@@ -43,9 +43,9 @@ export const projects: Project[] = [
         id: "Portfolio",
         title: {pt: "Portfólio", en: "Portfolio"},
         category: "front-end",
-        featured: true,
+        featured: false,
         description: {
-            pt: "Um portfólio interativo desenvolvido com React e TypeScript, projetado com uma interface que simula um ambiente de sistema operacional desktop. O projeto apresenta minhas habilidades, ferramentas e projetos de forma lúdica, criativa e totalmente imersiva.",
+            pt: "Um portfólio interativo desenvolvido com React e TypeScript, projetado com uma interface que simula um ambiente de sistema operacional desktop. O projeto apresenta minhas habilidades e projetos de forma lúdica, criativa e imersiva.",
             en: "An interactive portfolio built with React and TypeScript, designed with an interface that simulates a desktop operating system environment. The project showcases my skills, tools, and projects in a playful, creative, and fully immersive way."
         },
         thumbnail: "",
