@@ -1,8 +1,9 @@
 import { useState } from "react"
-import { projects } from "../../../data/projects"
+import { projects, type Project } from "../../../data/projects"
 import type { Language } from "../../../App"
 import { ProjectCard } from "./ProjectCard"
 import { SiGithub } from "react-icons/si"
+import { GalleryModal } from "./GalleryModal"
 
 type Filter = {
     id: FilterId, label: {pt: string, en: string } 
@@ -23,6 +24,8 @@ const filters: Filter[] = [
 
 export const ProjectsContent = ({currentLanguage}:ProjectsContentProps) => {
     const [activeFilter, setActiveFilter] = useState<FilterId>("all")
+    const [selectedImages, setSelectedImages] = useState<Project | null>(null)
+
 
     const filteredProjects = projects.filter(project => {
         if (activeFilter === "all") {
@@ -35,7 +38,7 @@ export const ProjectsContent = ({currentLanguage}:ProjectsContentProps) => {
     })
 
     return (
-        <div className="relative flex-1 flex flex-col p-5 gap-4 overflow-hidden">
+        <div className="relative flex-1 flex flex-col h-full w-full max-w-6xl p-5 gap-4 overflow-hidden">
             <section className="flex flex-row justify-between items-center">
                 <div className="flex gap-2 flex-wrap shrink-0">
                     {filters.map(filter => {
@@ -68,9 +71,12 @@ export const ProjectsContent = ({currentLanguage}:ProjectsContentProps) => {
             </section>
             <section className="flex-1 overflow-y-auto flex flex-col gap-2 p-1">
                 {filteredProjects.map(project => (
-                    <ProjectCard key={project.id} currentLanguage={currentLanguage} project={project}/>
+                    <ProjectCard key={project.id} currentLanguage={currentLanguage} project={project} onOpenGallery={setSelectedImages}/>
                 ))}
             </section>
+            {selectedImages && 
+                <GalleryModal project={selectedImages} onClose={() => setSelectedImages(null)} currentLanguage={currentLanguage}/>
+            }
         </div>
     )
 }
