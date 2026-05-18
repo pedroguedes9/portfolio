@@ -2,6 +2,7 @@ import { useState } from "react"
 import type { Project } from "../../../data/projects"
 import type { Language } from "../../../App"
 import { ArrowLeft, ArrowRight } from "lucide-react"
+import {AnimatePresence,motion} from "motion/react"
 
 
 type GalleryModalProps = {
@@ -37,30 +38,67 @@ export const GalleryModal = ({project, onClose, currentLanguage}:GalleryModalPro
     }
 
     return (
-        <div className="flex items-center justify-center p-4 absolute inset-0 z-50">
-            <div className="absolute inset-0 bg-black/60 rounded-2xl"></div>
-            <div className=" flex flex-col h-full max-h-full overflow-hidden relative z-10 w-full max-w-6xl rounded-3xl border border-white/10  bg-slate-950/97  shadow-2xl">
-                <div className="h-12 flex items-center justify-center px-5 py-4 bg-slate-950/95 z-20 border-b border-white/10 shrink-0" >
-                    <h2 className="text-sm font-semibold text-white/90">{project.title[currentLanguage]}</h2>
-                    <button className="absolute right-5 cursor-pointer" onClick={onClose} aria-label={currentLanguage === "pt" ? "Fechar galeria" : "Close gallery"} title={currentLanguage === "pt" ? "Fechar galeria" : "Close gallery"}>
+        <div  className="flex items-center justify-center p-4 absolute inset-0 z-50">
+            <motion.div 
+            initial={ { opacity: 0 } }
+            animate={ { opacity: 1 } }
+            exit={ { opacity: 0 } }
+            transition={ {duration: 0.18} }
+            className="absolute inset-0 bg-black/60 rounded-2xl"></motion.div>
+            <motion.div 
+            initial={ { opacity: 0, scale: 0.96, y: 12 } }
+            animate={ { opacity: 1, scale: 1, y: 0 } }
+            exit={ { opacity: 0, scale: 0.96, y: 12 } }
+            transition={ {
+                type: "spring",
+                stiffness: 260,
+                damping: 24
+            } }
+            className=" flex flex-col h-full max-h-full overflow-hidden relative z-10 w-full max-w-6xl rounded-3xl border border-white/10  bg-slate-950/97  shadow-2xl">
+                <div className="h-12 flex flex-col items-center justify-center px-5 bg-slate-950/95 z-20 border-b border-white/10 shrink-0 select-text" >
+                    <h2 className="absolute left-5 text-lg font-semibold text-white/95 tracking-tight">{project.title[currentLanguage]}</h2>
+                    
+                    <p className="text-sm text-slate-400 font-light max-w-2xl ">{project.images[currentImageIndex][currentLanguage]}</p>
+                    
+                    <motion.button 
+                    whileHover={{scale: 1.1, rotate: 4}}
+                    whileTap={{scale: 0.9}}
+                    className="absolute right-5 cursor-pointer" 
+                    onClick={onClose} 
+                    aria-label={currentLanguage === "pt" ? "Fechar galeria" : "Close gallery"} 
+                    title={currentLanguage === "pt" ? "Fechar galeria" : "Close gallery"}>
                         <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path fill="currentColor" d="M6.4 19L5 17.6l5.6-5.6L5 6.4L6.4 5l5.6 5.6L17.6 5L19 6.4L13.4 12l5.6 5.6l-1.4 1.4l-5.6-5.6z"/>
                         </svg>
-                    </button>
+                    </motion.button>
                 </div>
                 <div className=" relative flex items-center justify-center flex-1 min-h-0 overflow-hidden bg-black/30">
-                    <img 
-                    src={project.images[currentImageIndex]} 
-                    alt={project.id} 
-                    onClick={handleImageClick}
-                    style={{transformOrigin: zoomOrigin}}
-                    className={
-                        `h-full w-full rounded-xl object-contain transition-transform duration-300 
-                        ${isZoomed ? "scale-200 cursor-zoom-out" : "scale-100 cursor-zoom-in" }
-                        `}
-                    />
+                    <AnimatePresence mode="wait">
+                        <motion.img
+                        src={project.images[currentImageIndex].image}
+                        alt={project.images[currentImageIndex][currentLanguage]}
+                        onClick={handleImageClick}
+                        style={{transformOrigin: zoomOrigin}}
+                        initial={{opacity: 0, scale: 0.98}}
+                        animate={{
+                            opacity: 1,
+                            scale: isZoomed ? 1.8 : 1
+                        }}
+                        exit={{opacity: 0, scale: 0.98}}
+                        transition={ {
+                            opacity: {duration: 0.18},
+                            scale: {duration: 0.28}
+                        } } 
+                        className={
+                            `h-full w-full rounded-xl object-contain
+                            ${isZoomed ? "cursor-zoom-out" : "cursor-zoom-in" }
+                            `}
+                        />
+                    </AnimatePresence>
                     
-                    <button
+                    <motion.button
+                    whileHover={{scale: 1.08}}
+                    whileTap={{scale: 0.94}}
                     onClick={() => {
                         if (currentImageIndex < 1) {
                             return resetZoom(), setCurrentImageIndex(project.images.length - 1)
@@ -68,12 +106,14 @@ export const GalleryModal = ({project, onClose, currentLanguage}:GalleryModalPro
                         return resetZoom(), setCurrentImageIndex(prev => prev - 1)
                     }}
                     title={currentLanguage === "pt" ? "Anterior" : "Previous"}
-                    className="absolute left-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full flex items-center justify-center bg-black/40 border border-white/10 text-white/80 backdrop-blur-md cursor-pointer hover:border-violet-300/30 hover:bg-black/60 transition"
+                    className="absolute left-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full flex items-center justify-center bg-black/40 border border-white/10 text-white/80 backdrop-blur-md cursor-pointer hover:border-violet-300/30 hover:bg-black/60 transition-colors duration-300"
                     >
                         <ArrowLeft size={20}/>
-                    </button>
+                    </motion.button>
                     
-                    <button 
+                    <motion.button 
+                    whileHover={{scale: 1.08}}
+                    whileTap={{scale: 0.94}}
                     onClick={() => {
                         if (currentImageIndex === project.images.length - 1) {
                             return  resetZoom(), setCurrentImageIndex(0)
@@ -81,17 +121,19 @@ export const GalleryModal = ({project, onClose, currentLanguage}:GalleryModalPro
                         return resetZoom(), setCurrentImageIndex(prev => prev + 1)
                         }}
                         title={currentLanguage === "pt" ? "Próximo" : "Next"}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full flex items-center justify-center bg-black/40 border border-white/10 text-white/80 backdrop-blur-md cursor-pointer hover:border-violet-300/70 hover:bg-black/60 transition"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full flex items-center justify-center bg-black/40 border border-white/10 text-white/80 backdrop-blur-md cursor-pointer hover:border-violet-300/70 hover:bg-black/60 transition-colors duration-300"
                         >
                             <ArrowRight size={20} />
-                    </button>
+                    </motion.button>
                 </div>
                 <div className="flex flex-col items-center justify-between gap-2 px-5 py-2 border-t border-white/10 shrink-0">
                     <p className="text-xs text-white/50">{currentImageIndex + 1 } {currentLanguage === "pt" ? "de" : "of"} {project.images.length}</p>
-                    <div className="flex gap-2 overflow-x-auto">
+                    <div className="flex gap-2">
                         {
                             project.images.map((thumb, index) => (
-                                <button 
+                                <motion.button 
+                                whileHover={{y:-2}}
+                                whileTap={{scale:0.92}}
                                 key={index}
                                 onClick={() => {
                                     resetZoom()
@@ -99,20 +141,21 @@ export const GalleryModal = ({project, onClose, currentLanguage}:GalleryModalPro
                                 }}
                                 className={
                                     `cursor-pointer h-12 w-16 rounded-lg object-contain border opacity-60 hover:opacity-100
-                                    ${currentImageIndex === index && "border-violet-300/50 opacity-100 ring-2 ring-violet-400/20"} 
+                                    ${currentImageIndex === index && "border-violet-300/50 opacity-100 ring-2 ring-violet-400/20"}
+                                    transition-colors duration-300 
                                     `}
                                 >
                                     <img 
-                                    src={thumb} 
-                                    alt={`${index + 1}`} 
+                                    src={thumb.image} 
+                                    alt={thumb[currentLanguage]} 
                                     className="h-full w-full object-contain"
                                     />
-                                </button>
+                                </motion.button>
                             ))
                         }
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </div>
     )
 }

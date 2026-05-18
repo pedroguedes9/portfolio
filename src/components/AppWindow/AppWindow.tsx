@@ -19,9 +19,10 @@ type IndexProps = {
     currentLanguage: Language
     isMaximized: boolean
     onMaximizeChange: (value:boolean) => void
+    onMinimizeStart?: () => void
 }
 
-const AppWindow = ({title, onClose, children, containerRef, onMinimize, initialPosition,sourcePosition, onPositionChange, getMinimizeTarget, minimizeRequestId, currentLanguage, isMaximized, onMaximizeChange}:IndexProps) => {
+const AppWindow = ({title, onClose, children, containerRef, onMinimize, initialPosition,sourcePosition, onPositionChange, getMinimizeTarget, minimizeRequestId, currentLanguage, isMaximized, onMaximizeChange, onMinimizeStart}:IndexProps) => {
     const dragControls = useDragControls()
     const x = useMotionValue(initialPosition?.x ?? 0)
     const y = useMotionValue(initialPosition?.y ?? 0)
@@ -84,6 +85,8 @@ const AppWindow = ({title, onClose, children, containerRef, onMinimize, initialP
         }
 
         setIsMinimizing(true)
+        if (onMinimizeStart) onMinimizeStart()
+
 
         const xAnimation = animateValue(x, x.get() + delta.x, {
             duration: 0.5,
@@ -105,7 +108,7 @@ const AppWindow = ({title, onClose, children, containerRef, onMinimize, initialP
         ])
 
         onMinimize(restorePositionRef.current)
-    }, [isMinimizing, getMinimizeTarget, onMinimize, x,y])
+    }, [isMinimizing, getMinimizeTarget, onMinimize, onMinimizeStart,x,y])
 
     useEffect(() => {
         if (minimizeRequestId === 0) return
@@ -124,18 +127,22 @@ const AppWindow = ({title, onClose, children, containerRef, onMinimize, initialP
                 scale:sourcePosition? 0.15 : 0.92,
                 opacity: 0,
                 width: isMaximized ? "calc(100vw - 32px)" : "700px",
-                height: isMaximized ? "calc(100vh - 96px)" : "500px"
+                height: isMaximized ? "calc(100vh - 96px)" : "500px",
+                backdropFilter: "blur(0px)"
             } }
             animate={ {
                 scale: isTiny ? 0.10 : 1,
                 opacity: isTiny ? 0 : 1,
                 width: isMaximized ? "calc(100vw - 32px)" : "700px",
-                height: isMaximized ? "calc(100vh - 96px)" : "500px"
+                height: isMaximized ? "calc(100vh - 96px)" : "500px",
+                backdropFilter: isMaximized 
+                ? ["blur(0px)", "blur(0px)", "blur(4px)"] 
+                : ["blur(0px)", "blur(0px)", "blur(24px)"]
             } }
             exit={ 
                 isMinimizing
-                ? {scale: 0.15, opacity:0} 
-                : {scale: 0.92, opacity:0} 
+                ? {scale: 0.15, opacity:0, backdropFilter: "blur(0px)"} 
+                : {scale: 0.92, opacity:0, backdropFilter: "blur(0px)"} 
             }
             transition={ {
                 type: "spring",
@@ -160,6 +167,10 @@ const AppWindow = ({title, onClose, children, containerRef, onMinimize, initialP
                     type: "tween",
                     duration: 0.4,
                     ease: easeInOut
+                },
+                backdropFilter: {
+                    duration: 0.6,
+                    times: isMaximized ? [0, 0.8, 1] : [0, 0.1, 1]
                 }
             } }
             drag={!isMaximized}
@@ -175,7 +186,7 @@ const AppWindow = ({title, onClose, children, containerRef, onMinimize, initialP
                     })
                 } }
             style={{ x, y}}
-            className={`flex flex-col overflow-hidden rounded-2xl bg-linear-to-b from-white/10 via-black/20 to-black/40 border-2 border-white/15 shadow-2xl z-40 pointer-events-auto select-none transition-colors duration-300 ${isMaximized ? "backdrop-blur-sm bg-slate-950/80" : "backdrop-blur-xl bg-slate-950/50"} `}>
+            className={`flex flex-col overflow-hidden rounded-2xl bg-linear-to-b from-white/10 via-black/20 to-black/40 border-2 border-white/15 shadow-2xl z-40 pointer-events-auto select-none transition-colors duration-300 ${isMaximized ? "bg-slate-950/85" : "bg-slate-950/50"} `}>
                 <div className={`relative flex flex-row  p-3 pointer-events-auto ${isMaximized ? "cursor-auto active:cursor-auto" : "cursor-grab active:cursor-grabbing"}`}
                 onPointerDown={
                         (event) => {

@@ -9,6 +9,8 @@ import type { Language } from "../../App"
 import { AboutMe } from "../AppContent/AboutMe"
 import { Skills } from "../AppContent/Skills"
 import { ProjectsContent } from "../AppContent/Projects/ProjectsContent"
+import { Contact } from "../AppContent/contact"
+import { Services } from "../AppContent/services"
 
 
 export type WindowState = {
@@ -26,7 +28,8 @@ type DesktopWorkspace = {
 }
 export const DesktopWorkspace = ({currentLanguage, onLanguageChange}:DesktopWorkspace) => {
     const [windowState, setWindowState] = useState<WindowState>(null)
-    
+    const [isAnimating, setIsAnimating] = useState(false)
+
     const containerRef = useRef<HTMLDivElement | null>(null)
     const dockIconRefs = useRef<Record<string, HTMLDivElement | null>>({})
     const [minimizeRequestId, setMinimizeRequestId] = useState(0)
@@ -90,6 +93,7 @@ export const DesktopWorkspace = ({currentLanguage, onLanguageChange}:DesktopWork
             }
         })
         setMinimizeRequestId(0)
+        setIsAnimating(false)
     }
 
     const handlePositionChange = (position: {x:number, y:number}) => {
@@ -113,6 +117,10 @@ export const DesktopWorkspace = ({currentLanguage, onLanguageChange}:DesktopWork
                 return <Skills currentLanguage={currentLanguage}/>
             case "projects":
                 return <ProjectsContent currentLanguage={currentLanguage}/>
+            case "contact":
+                return <Contact currentLanguage={currentLanguage} isMaximized={isMaximized}/>
+            case "services":
+                return <Services currentLanguage={currentLanguage}/>
             default:
                 return null;
         }
@@ -138,6 +146,7 @@ export const DesktopWorkspace = ({currentLanguage, onLanguageChange}:DesktopWork
                     currentLanguage={currentLanguage}
                     isMaximized={isMaximized}
                     onMaximizeChange={setIsMaximized}
+                    onMinimizeStart={() => setIsAnimating(true)}
                     >
                         {renderAppContent()}
                     </AppWindow>
@@ -148,6 +157,7 @@ export const DesktopWorkspace = ({currentLanguage, onLanguageChange}:DesktopWork
             onOpenApp={handleOpenApp} 
             windowState={windowState ?? null}
             registerDockIcon={registerDockIcon}
+            isAnimating={isAnimating}
             />
         </div>
     )

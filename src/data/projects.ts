@@ -5,7 +5,11 @@ export type Project = {
     featured: boolean
     description: {pt: string, en: string}
     thumbnail: string
-    images: string[]
+    images: {
+        image: string
+        pt: string
+        en: string
+    }[]
     tags: string[]
     githubUrl: string
     demoUrl: string
@@ -24,15 +28,51 @@ export const projects: Project[] = [
         },
         thumbnail: "/images/projects/CS50-final-project/doce-imperio-3-thumb.webp",
         images: [
-            "/images/projects/CS50-final-project/doce-imperio-1.webp", 
-            "/images/projects/CS50-final-project/doce-imperio-2.webp",
-            "/images/projects/CS50-final-project/doce-imperio-3-mobile.webp",
-            "/images/projects/CS50-final-project/doce-imperio-4.webp",
-            "/images/projects/CS50-final-project/doce-imperio-5.webp",
-            "/images/projects/CS50-final-project/doce-imperio-6.webp",
-            "/images/projects/CS50-final-project/doce-imperio-7.webp",
-            "/images/projects/CS50-final-project/doce-imperio-8-mobile.webp",
-            "/images/projects/CS50-final-project/doce-imperio-8.webp"
+            {
+                image: "/images/projects/CS50-final-project/doce-imperio-1.webp",
+                pt: "Página de login",
+                en: "Login page"
+            },
+            {
+                image: "/images/projects/CS50-final-project/doce-imperio-2.webp",
+                pt: "Página de registro",
+                en: "Registration page"
+            },
+            {
+                image: "/images/projects/CS50-final-project/doce-imperio-3-mobile.webp",
+                pt: "Barra de navegação (Celular) ",
+                en: "Navbar (Mobile)"
+            },
+            {
+                image: "/images/projects/CS50-final-project/doce-imperio-4.webp",
+                pt: "Página de produtos",
+                en: "Product page"
+            },
+            {
+                image: "/images/projects/CS50-final-project/doce-imperio-5.webp",
+                pt: "Página de carrinho",
+                en: "Cart page"
+            },
+            {
+                image: "/images/projects/CS50-final-project/doce-imperio-6.webp",
+                pt: "Página de histórico de pedidos",
+                en: "Oder history page"
+            },
+            {
+                image: "/images/projects/CS50-final-project/doce-imperio-7.webp",
+                pt: "Página de perfil",
+                en: "Perfil page"
+            },
+            {
+                image: "/images/projects/CS50-final-project/doce-imperio-8-mobile.webp",
+                pt: "Dashboard (Celular)",
+                en: "Dashboard (Mobile)"
+            },
+            {
+                image: "/images/projects/CS50-final-project/doce-imperio-8.webp",
+                pt: "Dashboard",
+                en: "Dashboard"
+            }
         ],
         tags: ["HTML", "CSS", "Tailwind", "Python", "Flask", "SQLAlchemy"],
         githubUrl: "https://github.com/pedroguedes9/finalproject-CS50",
@@ -50,9 +90,7 @@ export const projects: Project[] = [
         },
         thumbnail: "",
         images: [
-            "/images/portfolio/portfolio-1-thumb",
-            "/images/portfolio/portfolio-2",
-            "/images/portfolio/portfolio-3"
+            
         ],
         tags: ["React", "TypeScript", "Tailwind"],
         githubUrl: "https://github.com/pedroguedes9/portfolio",

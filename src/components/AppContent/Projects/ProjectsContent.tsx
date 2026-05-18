@@ -4,6 +4,7 @@ import type { Language } from "../../../App"
 import { ProjectCard } from "./ProjectCard"
 import { SiGithub } from "react-icons/si"
 import { GalleryModal } from "./GalleryModal"
+import { AnimatePresence } from "motion/react"
 
 type Filter = {
     id: FilterId, label: {pt: string, en: string } 
@@ -74,9 +75,11 @@ export const ProjectsContent = ({currentLanguage}:ProjectsContentProps) => {
                     <ProjectCard key={project.id} currentLanguage={currentLanguage} project={project} onOpenGallery={setSelectedImages}/>
                 ))}
             </section>
-            {selectedImages && 
-                <GalleryModal project={selectedImages} onClose={() => setSelectedImages(null)} currentLanguage={currentLanguage}/>
-            }
+            <AnimatePresence>
+                {selectedImages &&
+                    <GalleryModal project={selectedImages} onClose={() => setSelectedImages(null)} currentLanguage={currentLanguage}/>
+                }
+            </AnimatePresence>
         </div>
     )
 }
