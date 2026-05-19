@@ -41,7 +41,7 @@ export const AboutMe = ({currentLanguage, isMaximized}:AboutMeProps) => {
                     transition-all duration-300 ease-in-out
                     ${isMaximized ? 'py-2 px-10 text-[17px]' : 'py-2 px-8 text-[15px]'}
                     `}>
-                    Baixar currículo
+                    {currentLanguage === "pt" ? "Baixar currículo" : "Download resume"}
                 </a>
             </section>
             <section className={`flex flex-col gap-3 max-w-125 transition-all duration-500 ease-in-out

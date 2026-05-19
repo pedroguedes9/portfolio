@@ -59,7 +59,7 @@ export const Contact = ({currentLanguage, isMaximized}:ContactProps) => {
                     transition-all duration-400ms ease-in-out cursor-pointer w-fit 
                     ${isMaximized ? 'py-2 px-10 text-[17px] ' : 'py-2 px-8 text-[15px] absolute bottom-2'}
                     `}>
-                    Baixar currículo
+                    {currentLanguage === "pt" ? "Baixar currículo" : "Download resume"}
                 </a>
             </section>
 

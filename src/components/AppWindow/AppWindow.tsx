@@ -187,7 +187,7 @@ const AppWindow = ({title, onClose, children, containerRef, onMinimize, initialP
                 } }
             style={{ x, y}}
             className={`flex flex-col overflow-hidden rounded-2xl bg-linear-to-b from-white/10 via-black/20 to-black/40 border-2 border-white/15 shadow-2xl z-40 pointer-events-auto select-none transition-colors duration-300 ${isMaximized ? "bg-slate-950/85" : "bg-slate-950/50"} `}>
-                <div className={`relative flex flex-row  p-3 pointer-events-auto ${isMaximized ? "cursor-auto active:cursor-auto" : "cursor-grab active:cursor-grabbing"}`}
+                <div className={`relative flex flex-row  p-3 pointer-events-auto ${isMaximized ? "cursor-auto active:cursor-auto" : "cursor-grab active:cursor-grabbing"} `}
                 onPointerDown={
                         (event) => {
                             if (isMaximized) return
@@ -211,7 +211,7 @@ const AppWindow = ({title, onClose, children, containerRef, onMinimize, initialP
                         {title}
                     </h2>
                 </div>
-                <div className={`flex flex-col flex-1 overflow-y-auto justify-center items-center`}>
+                <div className={`no-scrollbar flex flex-col flex-1 overflow-y-auto justify-center items-center`}>
                     {children}
                 </div>
             </motion.div>

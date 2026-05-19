@@ -88,9 +88,34 @@ export const projects: Project[] = [
             pt: "Um portfólio interativo desenvolvido com React e TypeScript, projetado com uma interface que simula um ambiente de sistema operacional desktop. O projeto apresenta minhas habilidades e projetos de forma lúdica, criativa e imersiva.",
             en: "An interactive portfolio built with React and TypeScript, designed with an interface that simulates a desktop operating system environment. The project showcases my skills, tools, and projects in a playful, creative, and fully immersive way."
         },
-        thumbnail: "",
+        thumbnail: "/images/projects/portfolio/portfolio-1-thumb.webp",
         images: [
-            
+            {
+                image: "/images/projects/portfolio/portfolio-2.webp",
+                pt: "Sobre mim",
+                en: "About Me"
+            },
+            {
+                image: "/images/projects/portfolio/portfolio-3.webp",
+                pt: "Habilidades",
+                en: "Skills"
+            },
+            {
+                image: "/images/projects/portfolio/portfolio-4.webp",
+                pt: "Projetos",
+                en: "Projects",
+            },
+            {
+                image: "/images/projects/portfolio/portfolio-5.webp",
+                pt: "Contato",
+                en: "Contacts",
+            },
+            {
+                image: "/images/projects/portfolio/portfolio-6.webp",
+                pt: "Serviços",
+                en: "Services"
+            }
+
         ],
         tags: ["React", "TypeScript", "Tailwind"],
         githubUrl: "https://github.com/pedroguedes9/portfolio",

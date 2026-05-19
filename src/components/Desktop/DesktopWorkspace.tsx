@@ -10,7 +10,7 @@ import { AboutMe } from "../AppContent/AboutMe"
 import { Skills } from "../AppContent/Skills"
 import { ProjectsContent } from "../AppContent/Projects/ProjectsContent"
 import { Contact } from "../AppContent/Contact"
-import { Services } from "../AppContent/Services"
+import Services from "../AppContent/Services"
 
 
 export type WindowState = {
@@ -42,6 +42,11 @@ export const DesktopWorkspace = ({currentLanguage, onLanguageChange}:DesktopWork
     const currentApp = apps.find(app => app.id === windowState?.id)
 
     const handleOpenApp = (id:string) => {
+        if (id === "github") {
+            window.open("https://github.com/pedroguedes9", "_blank", "noopener,noreferrer")
+            return 
+        }
+        
         if (windowState?.id === id && !windowState.isMinimized){
             setMinimizeRequestId(prev => prev + 1)
             return
