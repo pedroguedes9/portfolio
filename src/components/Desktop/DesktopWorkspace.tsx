@@ -9,8 +9,8 @@ import type { Language } from "../../App"
 import { AboutMe } from "../AppContent/AboutMe"
 import { Skills } from "../AppContent/Skills"
 import { ProjectsContent } from "../AppContent/Projects/ProjectsContent"
-import { Contact } from "../AppContent/contact"
-import { Services } from "../AppContent/services"
+import { Contact } from "../AppContent/Contact"
+import { Services } from "../AppContent/Services"
 
 
 export type WindowState = {
@@ -120,7 +120,7 @@ export const DesktopWorkspace = ({currentLanguage, onLanguageChange}:DesktopWork
             case "contact":
                 return <Contact currentLanguage={currentLanguage} isMaximized={isMaximized}/>
             case "services":
-                return <Services currentLanguage={currentLanguage}/>
+                return <Services currentLanguage={currentLanguage} />
             default:
                 return null;
         }
