@@ -1,16 +1,12 @@
 import { useRef, useState } from "react"
-import DesktopWallpaper from "./DesktopWallpaper"
+import Wallpaper from "../Wallpaper"
 import { Dock } from "./Dock"
 import { TopBar } from "./TopBar"
 import AppWindow from "../AppWindow/AppWindow"
 import { apps } from "../../data/apps"
 import { AnimatePresence } from "motion/react"
 import type { Language } from "../../App"
-import { AboutMe } from "../AppContent/AboutMe"
-import { Skills } from "../AppContent/Skills"
-import { ProjectsContent } from "../AppContent/Projects/ProjectsContent"
-import { Contact } from "../AppContent/Contact"
-import Services from "../AppContent/Services"
+import { RenderAppContent } from "../AppContent/renderAppContent"
 
 
 export type WindowState = {
@@ -114,27 +110,10 @@ export const DesktopWorkspace = ({currentLanguage, onLanguageChange}:DesktopWork
         })
     }
 
-    const renderAppContent = () => {
-        switch (windowState?.id) {
-            case "about":
-                return <AboutMe currentLanguage={currentLanguage} isMaximized={isMaximized}/>
-            case "skills":
-                return <Skills currentLanguage={currentLanguage}/>
-            case "projects":
-                return <ProjectsContent currentLanguage={currentLanguage}/>
-            case "contact":
-                return <Contact currentLanguage={currentLanguage} isMaximized={isMaximized}/>
-            case "services":
-                return <Services currentLanguage={currentLanguage} />
-            default:
-                return null;
-        }
-    }
-
     return (
         <div className="relative flex flex-col justify-center items-center h-screen w-full overflow-hidden" ref={containerRef}>
             <TopBar currentLanguage={currentLanguage} onLanguageChange={onLanguageChange}/>
-            <DesktopWallpaper name="Pedro Guedes" currentLanguage={currentLanguage} />
+            <Wallpaper name="Pedro Guedes" currentLanguage={currentLanguage} layoutMode={isMaximized ? "desktop-maximized" : "desktop"} />
             <AnimatePresence>
                 {windowState && !windowState.isMinimized && 
                     <AppWindow 
@@ -153,7 +132,7 @@ export const DesktopWorkspace = ({currentLanguage, onLanguageChange}:DesktopWork
                     onMaximizeChange={setIsMaximized}
                     onMinimizeStart={() => setIsAnimating(true)}
                     >
-                        {renderAppContent()}
+                        <RenderAppContent currentLanguage={currentLanguage} layoutMode={isMaximized ? "desktop-maximized" : "desktop"} windowState={windowState} /> 
                     </AppWindow>
                 }
             </AnimatePresence>

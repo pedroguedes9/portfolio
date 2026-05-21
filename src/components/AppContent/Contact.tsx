@@ -2,13 +2,14 @@ import { useState } from "react"
 import type { Language } from "../../App"
 import { contact } from "../../data/contact"
 import { ExternalLink } from "lucide-react"
+import type { LayoutMode } from "./LayoutMode"
 
 export type ContactProps = {
     currentLanguage: Language
-    isMaximized: boolean
+    layoutMode: LayoutMode
 }
 
-export const Contact = ({currentLanguage, isMaximized}:ContactProps) => {
+export const Contact = ({currentLanguage, layoutMode}:ContactProps) => {
     const [copiedId, setCopiedId] = useState<string | null>(null)
 
     const handleCopy = async (id: string, value: string) => {
@@ -28,22 +29,22 @@ export const Contact = ({currentLanguage, isMaximized}:ContactProps) => {
     return (
         <div className={`
             flex h-full select-text mx-auto transition-all duration-400ms ease-in-out
-            ${isMaximized 
+            ${layoutMode === "desktop-maximized" 
             ? "max-w-6xl w-full flex-row items-center gap-10 p-10 justify-between" 
             : "max-w-4xl w-full flex-col justify-center gap-4 py-0 px-4 -mt-10"
             }
         `}>
             <section className={`
                 flex flex-col gap-5 transition-all duration-400ms ease-in-out
-                ${isMaximized ? "w-1/2 items-start text-left" : "w-full items-center text-center"}
+                ${layoutMode === "desktop-maximized" ? "w-1/2 items-start text-left" : "w-full items-center text-center"}
             `}>
-                <div className={`flex flex-col transition-all duration-400ms ease-in-out gap-3 ${isMaximized ? "items-start" : "items-center" }`}>
-                    <h2 className={`font-semibold tracking-tight text-white transition-all duration-400ms ease-in-out ${isMaximized ? "text-4xl" : "text-3xl"}`}
+                <div className={`flex flex-col transition-all duration-400ms ease-in-out gap-3 ${layoutMode === "desktop-maximized" ? "items-start" : "items-center" }`}>
+                    <h2 className={`font-semibold tracking-tight text-white transition-all duration-400ms ease-in-out ${layoutMode === "desktop-maximized" ? "text-4xl" : "text-3xl"}`}
                     >{currentLanguage === "pt"
                     ? "Entre em contato"
                     : "Let's talk"}
                     </h2>
-                    <p className={`text-sm leading-relaxed text-white/70 transition-all duration-400ms ease-in-out ${isMaximized ? "max-w-md" : "max-w-2xl"}`}
+                    <p className={`text-sm leading-relaxed text-white/70 transition-all duration-400ms ease-in-out ${layoutMode === "desktop-maximized" ? "max-w-md" : "max-w-2xl"}`}
                         >{currentLanguage === "pt"
                     ? "Estou aberto a oportunidades, projetos freelancer e conexões na área de desenvolvimento web."
                     : "I'm open to opportunities, freelance projects, and connections in web development."}
@@ -57,7 +58,7 @@ export const Contact = ({currentLanguage, isMaximized}:ContactProps) => {
                     bg-violet-600/10 border border-violet-500/40 rounded-lg 
                     shadow-md shadow-transparent hover:shadow-violet-500/30 hover:bg-violet-600/30 hover:border-violet-400/20 hover:-translate-y-1
                     transition-all duration-400ms ease-in-out cursor-pointer w-fit 
-                    ${isMaximized ? 'py-2 px-10 text-[17px] ' : 'py-2 px-8 text-[15px] absolute bottom-2'}
+                    ${layoutMode === "desktop-maximized" ? 'py-2 px-10 text-[17px] ' : 'py-2 px-8 text-[15px] absolute bottom-2'}
                     `}>
                     {currentLanguage === "pt" ? "Baixar currículo" : "Download resume"}
                 </a>
@@ -65,7 +66,7 @@ export const Contact = ({currentLanguage, isMaximized}:ContactProps) => {
 
             <section className={`
                 transition-all duration-400ms ease-in-out flex flex-wrap justify-center
-                ${isMaximized ? "w-1/2 flex-col gap-4" : "w-full flex-row gap-3"}
+                ${layoutMode === "desktop-maximized" ? "w-1/2 flex-col gap-4" : "w-full flex-row gap-3"}
             `}>
                 {
                     contact.map(contact => {
@@ -76,7 +77,7 @@ export const Contact = ({currentLanguage, isMaximized}:ContactProps) => {
                             className={`flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 
                             hover:bg-white/7 hover:border-violet-300/25 hover:-translate-y-0.5 hover:shadow-lg 
                             hover:shadow-violet-500/10 transition-all duration-300 backdrop-blur-sm 
-                            ${isMaximized ? "w-full" : "w-[calc(50%-0.5rem)]"}
+                            ${layoutMode === "desktop-maximized" ? "w-full" : "w-[calc(50%-0.5rem)]"}
                             `} >
                                 <div className="flex items-center gap-3">
                                     <span className="h-10 w-10 rounded-xl bg-violet-500/10 border border-violet-300/20 text-violet-200 flex items-center justify-center">
