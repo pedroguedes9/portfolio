@@ -40,7 +40,7 @@ function App() {
   }, [language])
 
   return (
-    <div className='min-h-screen w-screen '>
+    <div className='min-h-dvh w-screen pb-[env(safe-area-inset-bottom)]'>
       {
         isDesktop 
         ? <DesktopWorkspace currentLanguage={language} onLanguageChange={setLanguage}/>
