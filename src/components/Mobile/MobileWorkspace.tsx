@@ -1,7 +1,7 @@
 import { useState } from "react"
 import type { Language } from "../../App"
 import { apps } from "../../data/apps"
-import { RenderAppContent } from "../AppContent/renderAppContent"
+import { RenderAppContent } from "../AppContent/RenderAppContent.tsx"
 import { StatusBar } from "./StatusBar"
 import Wallpaper from "../Wallpaper"
 import { AppGrid } from "./AppGrid"

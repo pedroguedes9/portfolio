@@ -4,7 +4,7 @@ import { AboutMe } from "./AboutMe"
 import { Contact } from "./Contact"
 import type { LayoutMode } from "./LayoutMode"
 import { ProjectsContent } from "./Projects/ProjectsContent"
-import Services from "./Services"
+import Services from "./Services.tsx"
 import { Skills } from "./Skills"
 
 type RenderAppContentProps = {

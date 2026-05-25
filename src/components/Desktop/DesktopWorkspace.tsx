@@ -6,7 +6,7 @@ import AppWindow from "./AppWindow"
 import { apps } from "../../data/apps"
 import { AnimatePresence } from "motion/react"
 import type { Language } from "../../App"
-import { RenderAppContent } from "../AppContent/renderAppContent"
+import { RenderAppContent } from "../AppContent/RenderAppContent"
 
 
 export type WindowState = {

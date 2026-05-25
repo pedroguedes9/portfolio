@@ -129,6 +129,6 @@ export const projects: Project[] = [
         ],
         tags: ["React", "TypeScript", "Tailwind"],
         githubUrl: "https://github.com/pedroguedes9/portfolio",
-        demoUrl: "..."
+        demoUrl: "https://pedroguedes.dev.br"
     }
 ]
