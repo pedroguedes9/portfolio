@@ -3,18 +3,21 @@ import type { Project } from "../../../data/projects"
 import type { Language } from "../../../App"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import {AnimatePresence,motion} from "motion/react"
+import type { LayoutMode } from "../LayoutMode"
 
 
 type GalleryModalProps = {
     project: Project
     onClose: () => void
     currentLanguage: Language
+    layoutMode: LayoutMode
 }
 
-export const GalleryModal = ({project, onClose, currentLanguage}:GalleryModalProps) => {
+export const GalleryModal = ({project, onClose, currentLanguage, layoutMode}:GalleryModalProps) => {
     const [currentImageIndex, setCurrentImageIndex] = useState<number>(0)
     const [isZoomed, setIsZoomed] = useState(false)
     const [zoomOrigin, setZoomOrigin] = useState("center center")
+    const isMobile = layoutMode === "mobile"
 
     const handleImageClick = (event: React.MouseEvent<HTMLImageElement>) => {
         if (isZoomed) {
@@ -38,13 +41,25 @@ export const GalleryModal = ({project, onClose, currentLanguage}:GalleryModalPro
     }
 
     return (
-        <div  className="flex items-center justify-center p-4 absolute inset-0 z-50">
-            <motion.div 
-            initial={ { opacity: 0 } }
-            animate={ { opacity: 1 } }
-            exit={ { opacity: 0 } }
-            transition={ {duration: 0.18} }
-            className="absolute inset-0 bg-black/60 rounded-2xl"></motion.div>
+        <div  className={`
+            flex z-50
+            ${
+                isMobile
+                    ? "fixed inset-0 p-0 bg-slate-950 pt-6"
+                    : "absolute inset-0 items-center justify-center p-4"
+            }
+        `}>
+            {
+                !isMobile && (
+                    <motion.div 
+                    initial={ { opacity: 0 } }
+                    animate={ { opacity: 1 } }
+                    exit={ { opacity: 0 } }
+                    transition={ {duration: 0.18} }
+                    className="absolute inset-0 bg-black/60 rounded-2xl">
+                    </motion.div>
+                )
+            }
             <motion.div 
             initial={ { opacity: 0, scale: 0.96, y: 12 } }
             animate={ { opacity: 1, scale: 1, y: 0 } }
@@ -54,12 +69,38 @@ export const GalleryModal = ({project, onClose, currentLanguage}:GalleryModalPro
                 stiffness: 260,
                 damping: 24
             } }
-            className=" flex flex-col h-full max-h-full overflow-hidden relative z-10 w-full max-w-6xl rounded-3xl border border-white/10  bg-slate-950/97  shadow-2xl">
-                <div className="h-12 flex flex-col items-center justify-center px-5 bg-slate-950/95 z-20 border-b border-white/10 shrink-0 select-text" >
-                    <h2 className="absolute left-5 text-lg font-semibold text-white/95 tracking-tight">{project.title[currentLanguage]}</h2>
+            className={`
+                relative z-10 flex flex-col overflow-hidden bg-slate-950
+                ${
+                    isMobile
+                        ? "h-full w-full rounded-none border-none"
+                        : "h-full max-h-full w-full max-w-6xl border border-white/10 shadow-2xl"
+                }
+            `}>
+                <div className={`
+                    relative flex shrink-0 items-center border-b border-white/10 bg-slate-950/95
+                    ${
+                        isMobile
+                            ? "h-16 px-4 pt-2"
+                            : "h-12 px-5 justify-center"
+                    }
+                `} >
+                    <h2 className={`
+                        font-semibold text-white/95 tracking-tight
+                        ${
+                            isMobile 
+                                ? "mx-auto max-w-[70%] truncate text-base text-center"
+                                : "absolute left-5 text-lg"
+                        }
+                    `}>
+                        {project.title[currentLanguage]}
+                    </h2>
                     
-                    <p className="text-sm text-slate-400 font-light max-w-2xl ">{project.images[currentImageIndex][currentLanguage]}</p>
-                    
+                    {!isMobile && (
+                        <p className="text-sm text-slate-400 font-light max-w-2xl">
+                            {project.images[currentImageIndex][currentLanguage]}
+                        </p>
+                    )}
                     <motion.button 
                     whileHover={{scale: 1.1, rotate: 4}}
                     whileTap={{scale: 0.9}}
@@ -72,9 +113,13 @@ export const GalleryModal = ({project, onClose, currentLanguage}:GalleryModalPro
                         </svg>
                     </motion.button>
                 </div>
-                <div className=" relative flex items-center justify-center flex-1 min-h-0 overflow-hidden bg-black/30">
+                <div className={`
+                    relative flex items-center justify-center flex-1 min-h-0 overflow-hidden bg-black/30
+                    ${isMobile ? "px-0" : ""}
+                `}>
                     <AnimatePresence mode="wait">
                         <motion.img
+                        key={project.images[currentImageIndex].image}
                         src={project.images[currentImageIndex].image}
                         alt={project.images[currentImageIndex][currentLanguage]}
                         onClick={handleImageClick}
@@ -106,7 +151,13 @@ export const GalleryModal = ({project, onClose, currentLanguage}:GalleryModalPro
                         return resetZoom(), setCurrentImageIndex(prev => prev - 1)
                     }}
                     title={currentLanguage === "pt" ? "Anterior" : "Previous"}
-                    className="absolute left-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full flex items-center justify-center bg-black/40 border border-white/10 text-white/80 backdrop-blur-md cursor-pointer hover:border-violet-300/30 hover:bg-black/60 transition-colors duration-300"
+                    className={`
+                        absolute left-2 top-1/2 -translate-y-1/2 rounded-full flex items-center justify-center bg-black/40 border 
+                        border-white/10 text-white/80 backdrop-blur-md cursor-pointer hover:border-violet-300/30 hover:bg-black/60 transition-colors duration-300
+                        ${
+                            isMobile ? "h-9 w-9" : "h-10 w-10"
+                        }
+                    `}
                     >
                         <ArrowLeft size={20}/>
                     </motion.button>
@@ -121,14 +172,39 @@ export const GalleryModal = ({project, onClose, currentLanguage}:GalleryModalPro
                         return resetZoom(), setCurrentImageIndex(prev => prev + 1)
                         }}
                         title={currentLanguage === "pt" ? "Próximo" : "Next"}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full flex items-center justify-center bg-black/40 border border-white/10 text-white/80 backdrop-blur-md cursor-pointer hover:border-violet-300/70 hover:bg-black/60 transition-colors duration-300"
+                        className={`
+                        absolute right-2 top-1/2 -translate-y-1/2 rounded-full flex items-center justify-center bg-black/40 border 
+                        border-white/10 text-white/80 backdrop-blur-md cursor-pointer hover:border-violet-300/30 hover:bg-black/60 transition-colors duration-300
+                        ${
+                            isMobile ? "h-9 w-9" : "h-10 w-10"
+                        }
+                    `}
                         >
                             <ArrowRight size={20} />
                     </motion.button>
                 </div>
-                <div className="flex flex-col items-center justify-between gap-2 px-5 py-2 border-t border-white/10 shrink-0">
-                    <p className="text-xs text-white/50">{currentImageIndex + 1 } {currentLanguage === "pt" ? "de" : "of"} {project.images.length}</p>
-                    <div className="flex gap-2">
+                <div className={`
+                    shrink-0 border-t border-white/10
+                    ${
+                        isMobile
+                            ? "px-3 py-3 gap-2"
+                            : "px-5 py-2 gap-2"
+                    }
+                `}>
+                    <p className="text-xs text-white/50 text-center">{currentImageIndex + 1 } {currentLanguage === "pt" ? "de" : "of"} {project.images.length}</p>
+                    {isMobile && (
+                        <p className="line-clamp-2 text-center text-xs leading-relaxed text-white/55">
+                            {project.images[currentImageIndex][currentLanguage]}
+                        </p>
+                    )}
+                    <div className={`
+                        flex gap-2
+                        ${
+                            isMobile
+                                ? "w-full overflow-x-auto px-1 pb-1 pt-1"
+                                : ""
+                        }
+                    `}>
                         {
                             project.images.map((thumb, index) => (
                                 <motion.button 
@@ -143,6 +219,11 @@ export const GalleryModal = ({project, onClose, currentLanguage}:GalleryModalPro
                                     `cursor-pointer h-12 w-16 rounded-lg object-contain border opacity-60 hover:opacity-100
                                     ${currentImageIndex === index && "border-violet-300/50 opacity-100 ring-2 ring-violet-400/20"}
                                     transition-colors duration-300 
+                                    ${
+                                        isMobile 
+                                            ? "h-14 w-20 shrink-0"
+                                            : "h-12 w-16"
+                                    }
                                     `}
                                 >
                                     <img 

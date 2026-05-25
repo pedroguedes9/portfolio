@@ -1,6 +1,6 @@
 import type { Language } from "../../App"
 import { apps } from "../../data/apps"
-import { AppIcon } from "../AppIcon"
+import { AppIcon } from "./AppIcon"
 import type { WindowState } from "./DesktopWorkspace"
 
 type dockProps = {

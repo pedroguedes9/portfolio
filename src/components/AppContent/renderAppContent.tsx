@@ -19,9 +19,9 @@ export const RenderAppContent = ({windowState, currentLanguage, layoutMode, acti
         case "about":
             return <AboutMe currentLanguage={currentLanguage} layoutMode={layoutMode}/>
         case "skills":
-            return <Skills currentLanguage={currentLanguage}/>
+            return <Skills currentLanguage={currentLanguage} layoutMode={layoutMode}/>
         case "projects":
-            return <ProjectsContent currentLanguage={currentLanguage}/>
+            return <ProjectsContent currentLanguage={currentLanguage} layoutMode={layoutMode}/>
         case "contact":
             return <Contact currentLanguage={currentLanguage} layoutMode={layoutMode}/>
         case "services":

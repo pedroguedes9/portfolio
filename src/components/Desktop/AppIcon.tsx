@@ -1,4 +1,4 @@
-import type { Language } from "../App"
+import type { Language } from "../../App"
 
 
 type Props = {

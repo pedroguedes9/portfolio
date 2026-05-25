@@ -1,12 +1,6 @@
 import { Battery, Signal, WifiIcon } from "lucide-react"
-import type { Language } from "../../App"
 
-type StatusBarProps = {
-    currentLanguage: Language
-    onLanguageChange: (lang: Language) => void
-}
-
-export const StatusBar = ({currentLanguage, onLanguageChange}:StatusBarProps) => {
+export const StatusBar = () => {
     return (
         <div className="flex items-center justify-between absolute top-0 left-0 w-full h-10 px-5 z-50 text-white/90 text-xs">
             <div className="text-base">
