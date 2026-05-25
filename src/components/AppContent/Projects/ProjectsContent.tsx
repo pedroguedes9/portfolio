@@ -81,6 +81,7 @@ export const ProjectsContent = ({currentLanguage, layoutMode}:ProjectsContentPro
                                 }
                                 transition-all duration-300`}
                             key={filter.id}
+                            lang={currentLanguage}
                             >
                                 {filter.label[currentLanguage]}
                             </button>
@@ -90,6 +91,7 @@ export const ProjectsContent = ({currentLanguage, layoutMode}:ProjectsContentPro
                 <a 
                 href="https://github.com/pedroguedes9"
                 target="_blank"
+                rel="noreferrer"
                 className={`
                     flex justify-center items-center gap-1 backdrop-blur-none bg-black/40 border border-white/10 text-white/80 px-5 
                     rounded-full hover:bg-black/60 hover:text-white transition-all shadow-lg hover:border-white/20 pointer-events-auto
@@ -97,9 +99,10 @@ export const ProjectsContent = ({currentLanguage, layoutMode}:ProjectsContentPro
                         isMobile ? "text-xs py-2.5" : "py-2 text-sm"
                     }
                     `}
+                lang={currentLanguage}
                 >
                         <SiGithub size={12}/>
-                        Ver todos os projetos no github
+                        { currentLanguage === "pt" ? "Ver todos os projetos no github" : "View all projects on GitHub"}
                 </a>    
             </section>
             <section className={`

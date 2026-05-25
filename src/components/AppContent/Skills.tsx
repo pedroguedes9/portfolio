@@ -69,7 +69,7 @@ export const Skills = ({currentLanguage, layoutMode}: SkillsProps) => {
                     ? "flex flex-col gap-3 px-1 pb-6"
                     : isDesktopMaximized 
                         ? "grid grid-cols-3 gap-4 p-8 content-center max-w-6xl mx-auto"
-                        : "grid grid-cols-2 gap-3 p-5 content-center max-w-6xl"
+                        : "grid grid-cols-2 gap-3 px-5 py-4 content-center max-w-6xl"
             }
         `}>
             {skills.map(category => {
@@ -81,7 +81,7 @@ export const Skills = ({currentLanguage, layoutMode}: SkillsProps) => {
                     ${category.id === "deepening" ? 'border-dashed border-indigo-500/6' : 'border-white/10'}
                     ${
                         isMobile
-                            ? "p-4 min-h-fit"
+                            ? "p-4 min-h-25"
                             : isDesktopMaximized
                                 ? "p-5 min-h-33.75"
                                 : "p-4 min-h-27.5"
@@ -93,7 +93,8 @@ export const Skills = ({currentLanguage, layoutMode}: SkillsProps) => {
                             ${
                                 isMobile ? "text-xs" : "text-sm"
                             }
-                        `}>
+                        `}
+                        lang={currentLanguage}>
                             {Icon && <Icon size={16} className="text-violet-400"/>}
                             {category.title[currentLanguage]}
                         </h2>
@@ -110,6 +111,7 @@ export const Skills = ({currentLanguage, layoutMode}: SkillsProps) => {
                                         hover:text-white transition-all duration-300
                                         ${isMobile ? "px-2.5 py-1 text-[11px]" : "px-3 py-1 text-xs"}
                                     `}
+                                    lang={currentLanguage}
                                     key={item}>
                                         {TagIcon && <TagIcon size={12}/>}
                                         {item}

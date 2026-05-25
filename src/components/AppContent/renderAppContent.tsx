@@ -25,7 +25,7 @@ export const RenderAppContent = ({windowState, currentLanguage, layoutMode, acti
         case "contact":
             return <Contact currentLanguage={currentLanguage} layoutMode={layoutMode}/>
         case "services":
-            return <Services currentLanguage={currentLanguage} />
+            return <Services currentLanguage={currentLanguage} layoutMode={layoutMode} />
         default:
             return null;
     }

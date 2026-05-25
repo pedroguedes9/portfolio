@@ -195,23 +195,39 @@ const AppWindow = ({title, onClose, children, containerRef, onMinimize, initialP
                         }
                     }>
                     <div className="flex flex-row gap-2 items-center cursor-auto" onPointerDown={(event) => {event.stopPropagation()}}>
-                        <button title={translations[currentLanguage].appWindow.buttons.close} onClick={() => {onClose()} } className="w-3 h-3 rounded-full bg-[#ff5f57] border border-[#e0443e] hover:brightness-90 cursor-pointer" lang={currentLanguage}></button>
-                        <button title={translations[currentLanguage].appWindow.buttons.minimize} onClick={ handleMinimizeClick} disabled={isMinimizing}
-                        className="w-3 h-3 rounded-full bg-[#febc2e] border border-[#d8a124] hover:brightness-90 cursor-pointer" lang={currentLanguage}></button>
-                        <button title={translations[currentLanguage].appWindow.buttons.maximize} onClick={() => {
+                        <button 
+                        aria-label={translations[currentLanguage].appWindow.buttons.close} 
+                        title={translations[currentLanguage].appWindow.buttons.close} 
+                        onClick={() => {onClose()} } className="w-3 h-3 rounded-full bg-[#ff5f57] border border-[#e0443e] hover:brightness-90 cursor-pointer" 
+                        lang={currentLanguage}>
+                        </button>
+                        <button 
+                        title={translations[currentLanguage].appWindow.buttons.minimize} 
+                        aria-label={translations[currentLanguage].appWindow.buttons.minimize}
+                        onClick={ handleMinimizeClick} 
+                        disabled={isMinimizing}
+                        className="w-3 h-3 rounded-full bg-[#febc2e] border border-[#d8a124] hover:brightness-90 cursor-pointer" 
+                        lang={currentLanguage}>
+                        </button>
+                        <button 
+                        title={translations[currentLanguage].appWindow.buttons.maximize} 
+                        aria-label={translations[currentLanguage].appWindow.buttons.maximize} 
+                        onClick={() => {
                             if (!isMaximized) {
                                 x.set(0)
                                 y.set(0)
                             }
                             onMaximizeChange(!isMaximized)
                         } }
-                        className="w-3 h-3 rounded-full bg-[#28c840] border border-[#1aab29] hover:brightness-90 cursor-pointer" lang={currentLanguage}></button>
+                        className="w-3 h-3 rounded-full bg-[#28c840] border border-[#1aab29] hover:brightness-90 cursor-pointer" 
+                        lang={currentLanguage}>
+                        </button>
                     </div>
                     <h2 className="absolute inset-0 flex items-center justify-center text-lg font-medium text-white/70 pointer-events-none" lang={currentLanguage}>
                         {title}
                     </h2>
                 </div>
-                <div className={`no-scrollbar flex flex-col flex-1 overflow-y-auto justify-center items-center`}>
+                <div className={`flex flex-col flex-1 overflow-y-auto justify-center items-center`}>
                     {children}
                 </div>
             </motion.div>

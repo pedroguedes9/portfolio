@@ -31,6 +31,9 @@ export const AppIcon = ({id, icon:Icon, label, onOpen, status, appIconRef, curre
             <button onClick={() => {
                 onOpen(id)
             }}
+            aria-label={label}
+            title={label}
+            lang={currentLanguage}
             className={`group size-20 flex flex-col items-center justify-center bg-linear-to-b from-white/8 cursor-pointer
             to-white/2 rounded-2xl border-t border-white/10 relative overflow-hidden focus-visible:outline
             focus-visible:outline-violet-300/50 hover:border-violet-300/30 hover:scale-105 transition-all duration-300

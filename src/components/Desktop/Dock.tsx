@@ -18,7 +18,9 @@ export const Dock = ({currentLanguage, onOpenApp, windowState, registerDockIcon,
             <div className=" rounded-2xl bg-linear-to-b from-white/7 via-white/3 to-transparent absolute inset-0 pointer-events-none"></div>
             <div className="absolute inset-x-0 top-0 h-1/2 bg-linear-to-b from-white/6 via-white/2 to-transparent pointer-events-none"></div>
             <div className="relative w-fit z-10 h-full flex items-center justify-center gap-7 overflow-visible">
-                {apps.map(app => {
+                {apps
+                .filter(app => app.id !== "language")
+                .map(app => {
                     let status: "idle" | "minimized" | "open" = "idle"
                     if (!windowState || windowState?.id !== app.id) {
                         status = "idle"                

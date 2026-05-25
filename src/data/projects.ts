@@ -56,12 +56,12 @@ export const projects: Project[] = [
             {
                 image: "/images/projects/CS50-final-project/doce-imperio-6.webp",
                 pt: "Página de histórico de pedidos",
-                en: "Oder history page"
+                en: "Order history page"
             },
             {
                 image: "/images/projects/CS50-final-project/doce-imperio-7.webp",
                 pt: "Página de perfil",
-                en: "Perfil page"
+                en: "Profile page"
             },
             {
                 image: "/images/projects/CS50-final-project/doce-imperio-8-mobile.webp",
@@ -91,6 +91,11 @@ export const projects: Project[] = [
         thumbnail: "/images/projects/portfolio/portfolio-1-thumb.webp",
         images: [
             {
+                image: "/images/projects/portfolio/portfolio-1.webp",
+                pt: "Área de Trabalho",
+                en: "Workspace"
+            },
+            {
                 image: "/images/projects/portfolio/portfolio-2.webp",
                 pt: "Sobre mim",
                 en: "About Me"
@@ -106,9 +111,14 @@ export const projects: Project[] = [
                 en: "Projects",
             },
             {
+                image: "/images/projects/portfolio/portfolio-4-mobile.webp",
+                pt: "Projetos (Mobile)",
+                en: "Projects (Mobile)"
+            },
+            {
                 image: "/images/projects/portfolio/portfolio-5.webp",
                 pt: "Contato",
-                en: "Contacts",
+                en: "Contact",
             },
             {
                 image: "/images/projects/portfolio/portfolio-6.webp",

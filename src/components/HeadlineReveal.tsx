@@ -1,14 +1,16 @@
 import { easeInOut, motion } from "motion/react"
+import type { Language } from "../App"
 import type { LayoutMode } from "./AppContent/LayoutMode"
 
 type HeadlineReveal = {
     text: string
+    currentLanguage: Language
     delay: number
     duration: number
     layoutMode: LayoutMode
 }
 
-export const HeadlineReveal = ({text, delay, duration, layoutMode}: HeadlineReveal) => {
+export const HeadlineReveal = ({text, currentLanguage, delay, duration, layoutMode}: HeadlineReveal) => {
     return (
         <div  className="relative flex justify-center items-center">
             <motion.p
@@ -23,6 +25,7 @@ export const HeadlineReveal = ({text, delay, duration, layoutMode}: HeadlineReve
                 font-normal text-indigo-300 text-center text-balance text-shadow-lg inline-block 
                 ${layoutMode === "mobile" ? "text-sm" : "text-xl whitespace-nowrap"}
                 `}
+            lang={currentLanguage}
             >
                 {text}
             </motion.p>

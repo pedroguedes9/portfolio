@@ -40,6 +40,20 @@ export const GalleryModal = ({project, onClose, currentLanguage, layoutMode}:Gal
         setZoomOrigin("center center")
     }
 
+    const goToPrevious = () => {
+        resetZoom()
+        setCurrentImageIndex(prev => 
+            prev === 0 ? project.images.length - 1 : prev - 1
+        )
+    }
+
+    const goToNext = () => {
+        resetZoom()
+        setCurrentImageIndex(prev => 
+            prev === project.images.length - 1 ? 0 : prev + 1
+        )
+    }
+
     return (
         <div  className={`
             flex z-50
@@ -92,12 +106,13 @@ export const GalleryModal = ({project, onClose, currentLanguage, layoutMode}:Gal
                                 ? "mx-auto max-w-[70%] truncate text-base text-center"
                                 : "absolute left-5 text-lg"
                         }
-                    `}>
+                    `}
+                    lang={currentLanguage}>
                         {project.title[currentLanguage]}
                     </h2>
                     
                     {!isMobile && (
-                        <p className="text-sm text-slate-400 font-light max-w-2xl">
+                        <p className="text-sm text-slate-400 font-light max-w-2xl" lang={currentLanguage}>
                             {project.images[currentImageIndex][currentLanguage]}
                         </p>
                     )}
@@ -107,7 +122,8 @@ export const GalleryModal = ({project, onClose, currentLanguage, layoutMode}:Gal
                     className="absolute right-5 cursor-pointer" 
                     onClick={onClose} 
                     aria-label={currentLanguage === "pt" ? "Fechar galeria" : "Close gallery"} 
-                    title={currentLanguage === "pt" ? "Fechar galeria" : "Close gallery"}>
+                    title={currentLanguage === "pt" ? "Fechar galeria" : "Close gallery"}
+                    lang={currentLanguage}>
                         <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path fill="currentColor" d="M6.4 19L5 17.6l5.6-5.6L5 6.4L6.4 5l5.6 5.6L17.6 5L19 6.4L13.4 12l5.6 5.6l-1.4 1.4l-5.6-5.6z"/>
                         </svg>
@@ -122,6 +138,7 @@ export const GalleryModal = ({project, onClose, currentLanguage, layoutMode}:Gal
                         key={project.images[currentImageIndex].image}
                         src={project.images[currentImageIndex].image}
                         alt={project.images[currentImageIndex][currentLanguage]}
+                        lang={currentLanguage}
                         onClick={handleImageClick}
                         style={{transformOrigin: zoomOrigin}}
                         initial={{opacity: 0, scale: 0.98}}
@@ -137,7 +154,9 @@ export const GalleryModal = ({project, onClose, currentLanguage, layoutMode}:Gal
                         className={
                             `h-full w-full rounded-xl object-contain
                             ${isZoomed ? "cursor-zoom-out" : "cursor-zoom-in" }
-                            `}
+                        `}
+                        loading="lazy"
+                        decoding="async"
                         />
                     </AnimatePresence>
                     
@@ -145,12 +164,11 @@ export const GalleryModal = ({project, onClose, currentLanguage, layoutMode}:Gal
                     whileHover={{scale: 1.08}}
                     whileTap={{scale: 0.94}}
                     onClick={() => {
-                        if (currentImageIndex < 1) {
-                            return resetZoom(), setCurrentImageIndex(project.images.length - 1)
-                        }
-                        return resetZoom(), setCurrentImageIndex(prev => prev - 1)
+                        goToPrevious()
                     }}
                     title={currentLanguage === "pt" ? "Anterior" : "Previous"}
+                    aria-label={currentLanguage === "pt" ? "Imagem anterior" : "Previous image"}
+                    lang={currentLanguage}
                     className={`
                         absolute left-2 top-1/2 -translate-y-1/2 rounded-full flex items-center justify-center bg-black/40 border 
                         border-white/10 text-white/80 backdrop-blur-md cursor-pointer hover:border-violet-300/30 hover:bg-black/60 transition-colors duration-300
@@ -166,12 +184,11 @@ export const GalleryModal = ({project, onClose, currentLanguage, layoutMode}:Gal
                     whileHover={{scale: 1.08}}
                     whileTap={{scale: 0.94}}
                     onClick={() => {
-                        if (currentImageIndex === project.images.length - 1) {
-                            return  resetZoom(), setCurrentImageIndex(0)
-                        }
-                        return resetZoom(), setCurrentImageIndex(prev => prev + 1)
-                        }}
+                        goToNext()
+                    }}
                         title={currentLanguage === "pt" ? "Próximo" : "Next"}
+                        aria-label={currentLanguage === "pt" ? "Próxima imagem" : "Next image"}
+                        lang={currentLanguage}
                         className={`
                         absolute right-2 top-1/2 -translate-y-1/2 rounded-full flex items-center justify-center bg-black/40 border 
                         border-white/10 text-white/80 backdrop-blur-md cursor-pointer hover:border-violet-300/30 hover:bg-black/60 transition-colors duration-300
@@ -191,9 +208,9 @@ export const GalleryModal = ({project, onClose, currentLanguage, layoutMode}:Gal
                             : "px-5 py-2 gap-2"
                     }
                 `}>
-                    <p className="text-xs text-white/50 text-center">{currentImageIndex + 1 } {currentLanguage === "pt" ? "de" : "of"} {project.images.length}</p>
+                    <p className="text-xs text-white/50 text-center" lang={currentLanguage}>{currentImageIndex + 1 } {currentLanguage === "pt" ? "de" : "of"} {project.images.length}</p>
                     {isMobile && (
-                        <p className="line-clamp-2 text-center text-xs leading-relaxed text-white/55">
+                        <p className="line-clamp-2 text-center text-xs leading-relaxed text-white/55" lang={currentLanguage}>
                             {project.images[currentImageIndex][currentLanguage]}
                         </p>
                     )}
@@ -215,6 +232,8 @@ export const GalleryModal = ({project, onClose, currentLanguage, layoutMode}:Gal
                                     resetZoom()
                                     setCurrentImageIndex(index)
                                 }}
+                                aria-label={thumb[currentLanguage]}
+                                lang={currentLanguage}
                                 className={
                                     `cursor-pointer h-12 w-16 rounded-lg object-contain border opacity-60 hover:opacity-100
                                     ${currentImageIndex === index && "border-violet-300/50 opacity-100 ring-2 ring-violet-400/20"}
@@ -229,7 +248,9 @@ export const GalleryModal = ({project, onClose, currentLanguage, layoutMode}:Gal
                                     <img 
                                     src={thumb.image} 
                                     alt={thumb[currentLanguage]} 
+                                    lang={currentLanguage}
                                     className="h-full w-full object-contain"
+                                    loading="lazy"
                                     />
                                 </motion.button>
                             ))

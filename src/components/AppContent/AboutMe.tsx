@@ -29,7 +29,8 @@ export const AboutMe = ({currentLanguage, layoutMode}:AboutMeProps) => {
                         ? "py-2 px-10 text-[17px] mt-4"
                         : "py-2 px-8 text-[15px] mt-4"
             }
-        `}>
+        `}
+        lang={currentLanguage}>
             {currentLanguage === "pt" ? "Baixar currículo" : "Download resume"}
         </a>
     )
@@ -91,7 +92,8 @@ export const AboutMe = ({currentLanguage, layoutMode}:AboutMeProps) => {
                                 ? "text-base"
                                 : "text-sm"
                     }
-                `}>
+                `}
+                lang={currentLanguage}>
                     {translations[currentLanguage].appWindow.about.role}
                 </p>
                 <div className={`
@@ -153,7 +155,8 @@ export const AboutMe = ({currentLanguage, layoutMode}:AboutMeProps) => {
                                 ? "text-3xl"
                                 : "text-xl"
                     } 
-                `}>
+                `}
+                lang={currentLanguage}>
                     {currentLanguage === "pt" ? "Olá!" : "Hello!"}
                 </p>
                 <p className={`
@@ -165,9 +168,12 @@ export const AboutMe = ({currentLanguage, layoutMode}:AboutMeProps) => {
                                 ? "text-[17px] max-w-125"
                                 : "text-[15px] max-w-125"
                     } 
-                `}>
-                    {firstParagraph.map(part => (
-                        part.highlight ? <span className="font-medium text-violet-400">{part.text}</span> : part.text
+                `}
+                lang={currentLanguage}>
+                    {firstParagraph.map((part, index) => (
+                        part.highlight
+                            ? <span key={`about-first-${index}`} className="font-medium text-violet-400">{part.text}</span>
+                            : <span key={`about-first-${index}`}>{part.text}</span>
                     ))}
                 </p>
                 <p className={`
@@ -179,9 +185,10 @@ export const AboutMe = ({currentLanguage, layoutMode}:AboutMeProps) => {
                                 ? "text-[17px] max-w-125"
                                 : "text-[15px] max-w-125"
                     } 
-                `}>
-                    {secondParagraph.map(part => (
-                        part.text
+                `}
+                lang={currentLanguage}>
+                    {secondParagraph.map((part, index) => (
+                        <span key={`about-second-${index}`}>{part.text}</span>
                     ))}
                 </p>
                 {isMobile && resumeButton}

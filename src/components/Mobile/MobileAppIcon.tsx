@@ -13,7 +13,10 @@ export const MobileAppIcon = ({id, icon: Icon, label, onOpen, currentLanguage}:M
         <div className="flex flex-col items-center gap-2">
             <button
             type="button" 
-            onClick={() => onOpen(id)} 
+            onClick={() => onOpen(id)}
+            aria-label={label}
+            title={label}
+            lang={currentLanguage}
             className="flex flex-col justify-center items-center size-16 rounded-2xl bg-linear-to-b from-white/16 to-white/6 border-white/10 
                 shadow-lg shadow-black/20 backdrop-blur-sm relative overflow-hidden transition-all active:scale-95 active:brightness-110
                 " 

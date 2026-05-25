@@ -17,7 +17,7 @@ const Wallpaper = ({name, currentLanguage, layoutMode}: DesktopWallpaperProps) =
                 font-bold text-shadow-lg
                 ${layoutMode === "mobile" ? "text-4xl" : "text-7xl"}
                 `}>{name}</h1>
-            <HeadlineReveal delay={0.5} duration={1.5} text={translations[currentLanguage].wallpaper.headline} layoutMode={layoutMode}/>
+            <HeadlineReveal delay={0.5} duration={1.5} text={translations[currentLanguage].wallpaper.headline} currentLanguage={currentLanguage} layoutMode={layoutMode}/>
         </div>
     )
 }

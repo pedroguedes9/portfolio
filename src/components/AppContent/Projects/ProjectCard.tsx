@@ -32,7 +32,8 @@ export const ProjectCard = ({currentLanguage, project, onOpenGallery, layoutMode
                         isMobile ? "w-full h-40 object-contain" : "h-36 w-24 shrink-0 object-cover"
                     }
                 `}
-                src={project.thumbnail} alt={project.id}
+                src={project.thumbnail}
+                alt={project.title[currentLanguage]}
                 />
                 {project.images.length > 0 &&
                     <button 
@@ -44,7 +45,8 @@ export const ProjectCard = ({currentLanguage, project, onOpenGallery, layoutMode
                                 ? "opacity-100 bg-black/30" 
                                 : "opacity-0 group-hover:opacity-100"
                         }
-                    `}>
+                    `}
+                    lang={currentLanguage}>
                         {currentLanguage === "pt" ? "Ver galeria" : "View gallery"}
                     </button>
                 }
@@ -54,7 +56,7 @@ export const ProjectCard = ({currentLanguage, project, onOpenGallery, layoutMode
                     flex gap-2
                     ${isMobile ? "flex-col" : "flex-row justify-between"}
                 `}>
-                    <h2 className="text-base font-semibold text-white/90">
+                    <h2 className="text-base font-semibold text-white/90" lang={currentLanguage}>
                         {project.title[currentLanguage]}
                     </h2>
                     <div className={`
@@ -67,6 +69,7 @@ export const ProjectCard = ({currentLanguage, project, onOpenGallery, layoutMode
                         target="_blank" 
                         href={project.githubUrl} 
                         rel="noreferrer"
+                        lang={currentLanguage}
                         className={`
                             flex gap-1 items-center font-medium text-white/60 bg-white/5 border border-white/10 rounded-full 
                             hover:bg-violet-500/20 hover:border-violet-400/30 hover:text-violet-100 transition-all
@@ -77,25 +80,12 @@ export const ProjectCard = ({currentLanguage, project, onOpenGallery, layoutMode
                             <ExternalLink size={12}/>
                             Github
                         </a>
-                        <a 
-                        target="_blank" 
-                        href={project.demoUrl} 
-                        rel="noreferrer"
-                        className={`
-                            flex gap-1 items-center font-medium text-white/60 bg-white/5 border border-white/10 rounded-full 
-                            hover:bg-violet-500/20 hover:border-violet-400/30 hover:text-violet-100 transition-all
-                            ${
-                                isMobile ? "px-2.5 py-1.5 text-[11px]" : "px-3 py-1.5 text-xs"
-                            }
-                        `}>
-                            <ExternalLink size={12}/>
-                            Demo
-                        </a>
-                        {project.videoDemoUrl && 
+                        {project.demoUrl && project.demoUrl !== "..." && (
                             <a 
                             target="_blank" 
-                            href={project.videoDemoUrl} 
+                            href={project.demoUrl} 
                             rel="noreferrer"
+                            lang={currentLanguage}
                             className={`
                                 flex gap-1 items-center font-medium text-white/60 bg-white/5 border border-white/10 rounded-full 
                                 hover:bg-violet-500/20 hover:border-violet-400/30 hover:text-violet-100 transition-all
@@ -104,7 +94,24 @@ export const ProjectCard = ({currentLanguage, project, onOpenGallery, layoutMode
                                 }
                             `}>
                                 <ExternalLink size={12}/>
-                                Vídeo
+                                Demo
+                            </a>
+                        )}
+                        {project.videoDemoUrl && 
+                            <a 
+                            target="_blank" 
+                            href={project.videoDemoUrl} 
+                            rel="noreferrer"
+                            lang={currentLanguage}
+                            className={`
+                                flex gap-1 items-center font-medium text-white/60 bg-white/5 border border-white/10 rounded-full 
+                                hover:bg-violet-500/20 hover:border-violet-400/30 hover:text-violet-100 transition-all
+                                ${
+                                    isMobile ? "px-2.5 py-1.5 text-[11px]" : "px-3 py-1.5 text-xs"
+                                }
+                            `}>
+                                <ExternalLink size={12}/>
+                                { currentLanguage === "pt" ? "Vídeo" : "Video"}
                             </a>
                         }
                     </div>
@@ -114,7 +121,8 @@ export const ProjectCard = ({currentLanguage, project, onOpenGallery, layoutMode
                     ${
                         isMobile ? "line-clamp-none" : " line-clamp-3"
                     }
-                `}>
+                `}
+                lang={currentLanguage}>
                     {project.description[currentLanguage]}
                 </p>
                 <div className="flex flex-row flex-wrap gap-1.5 ">

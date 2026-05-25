@@ -54,7 +54,7 @@ export const translations = {
             about: {
                 role: "Full-Stack developer",
                 firstParagraph: [
-                    {text: "I am"},
+                    {text: "I am a"},
                     {text: " Full-Stack developer", highlight: true },
                     {text: " focused on modern web applications, using"},
                     {text: " React, TypeScript, Python and Flask", highlight: true},
@@ -64,7 +64,7 @@ export const translations = {
                     {text: " back-end structuring", highlight: true},
                     {text: ","},
                     {text: " API integration", highlight: true},
-                    {text: " e"},
+                    {text: " and"},
                     {text: " database", highlight: true},
                     {text: ","},
                     {text: " always striving for organization, performance, and a good user experience."}
