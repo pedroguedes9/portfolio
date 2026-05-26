@@ -30,7 +30,7 @@ export const Contact = ({currentLanguage, layoutMode}:ContactProps) => {
 
     return (
         <div className={`
-            flex h-full select-text mx-auto transition-all duration-400ms ease-in-out
+            flex select-text mx-auto transition-all duration-400ms ease-in-out
             ${
                 isMobile 
                     ? "flex min-h-full w-full flex-col gap-6 pb-6"
