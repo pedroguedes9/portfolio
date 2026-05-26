@@ -61,7 +61,7 @@ export const ProjectsContent = ({currentLanguage, layoutMode}:ProjectsContentPro
                     flex gap-2 justify-center
                     ${
                         isMobile
-                            ? "overflow-x-auto flex-nowrap py-1"
+                            ? "flex-nowrap py-1"
                             : "flex-wrap shrink-0"
                     }
                 `}>
