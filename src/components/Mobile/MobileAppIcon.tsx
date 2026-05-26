@@ -1,4 +1,5 @@
 import type { Language } from "../../App"
+import { ExternalLink } from "lucide-react"
 
 type MobileAppIconProps = {
     id: string,
@@ -24,7 +25,18 @@ export const MobileAppIcon = ({id, icon: Icon, label, onOpen, currentLanguage}:M
                 <div className="absolute inset-x-0 top-0 h-1/2 bg-linear-to-b from-white/7 to-transparent"></div>
                 <Icon size={34}/>
             </button>
-            <p className="text-xs text-white/90 text-center leading-tight max-w-20 drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)]" lang={currentLanguage}>{label}</p>
+            <p className="text-xs text-white/90 text-center leading-tight max-w-20 drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)]" lang={currentLanguage}>
+                {
+                    id === "github" ? (
+                        <span className="flex items-start justify-center gap-0.5">
+                            {label}
+                            <ExternalLink size={10} />
+                        </span>
+                    ) : (
+                        label
+                    )
+                }
+            </p>
         </div>
     )
 }
