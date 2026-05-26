@@ -33,7 +33,7 @@ export const Contact = ({currentLanguage, layoutMode}:ContactProps) => {
             flex h-full select-text mx-auto transition-all duration-400ms ease-in-out
             ${
                 isMobile 
-                    ? "flex min-h-full w-full flex-col gap-6"
+                    ? "flex min-h-full w-full flex-col gap-6 pb-6"
                     : isDesktopMaximized
                         ? "flex h-full max-w-6xl w-full flex-row items-center justify-between gap-10 p-10"
                         : "flex h-full max-w-6xl w-full flex-col justify-center gap-4 px-4 -mt-10"
