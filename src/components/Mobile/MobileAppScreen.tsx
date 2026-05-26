@@ -12,7 +12,7 @@ type MobileAppScreenProps = {
 export const MobileAppScreen = ({title, onClose, children, currentLanguage}:MobileAppScreenProps) => {
     return (
         <motion.div 
-        className="flex flex-col absolute inset-0 z-40 pt-10 bg-slate-950/90 backdrop-blur-xs text-white"
+        className="flex flex-col absolute inset-0 z-40 pt-10 bg-slate-950/90 backdrop-blur-xs text-white "
         initial={ {scale: 0.96, opacity: 0, y: 15} }
         animate={ {scale: 1, opacity: 1, y: 0} }
         exit={ {scale:0.96 ,opacity: 0, y: 15} }
@@ -33,7 +33,7 @@ export const MobileAppScreen = ({title, onClose, children, currentLanguage}:Mobi
                     {title}
                 </h2>
             </header>
-            <main className="flex-1 min-h-0 overflow-y-auto px-4 py-5">
+            <main className="flex-1 min-h-0 overflow-y-auto px-4 py-5 pb-[max(env(safe-area-inset-bottom),16px)]">
                 {children}
             </main>
         </motion.div>

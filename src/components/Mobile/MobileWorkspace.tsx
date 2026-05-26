@@ -34,7 +34,7 @@ export const MobileWorkspace = ({currentLanguage, onLanguageChange}:MobileWorksp
     }
 
     return (
-        <div className="relative flex flex-col justify-center items-center h-screen w-full overflow-hidden">
+        <div className="relative flex flex-col justify-center items-center h-dvh w-full overflow-hidden pb-[env(safe-area-inset-bottom)]">
             <StatusBar currentLanguage={currentLanguage} />
             <Wallpaper currentLanguage={currentLanguage} name="Pedro Guedes" layoutMode="mobile"/>
             <AppGrid currentLanguage={currentLanguage} onOpen={handleOpenApp} />
