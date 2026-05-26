@@ -5,7 +5,7 @@ export const translations = {
             portfolio: "Portfólio"
         },
         wallpaper: {
-            headline: "Construindo experiencias web modernas, otimizadas e funcionais"
+            headline: "Construindo experiências web modernas, otimizadas e funcionais"
         },
         appWindow: {
             buttons: {
