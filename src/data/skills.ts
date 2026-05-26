@@ -57,5 +57,13 @@ export const skills: Category[] = [
     }, items: {
         pt: ["React & TypeScript", "Next.js", "UI/UX moderna", "Produtos digitais"],
         en: ["React & TypeScript", "Next.js", "Modern UI/UX", "Digital Products"]
+    } },
+
+    {id: "softSkills", title: {
+        pt: "Competências profissionais",
+        en: "Professional skills"
+    }, items: {
+        pt: ["Comunicação técnica", "Decomposição de problemas", "Autonomia com responsabilidade", "Aprendizado orientado a projeto", "Atenção à experiência do usuário", "Priorização por etapas"],
+        en: ["Technical communication", "Problem decomposition", "Ownership", "Project-driven learning", "User experience awareness", "Organization and prioritization"]
     } }
 ]

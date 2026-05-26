@@ -6,7 +6,8 @@ import {
     Database, 
     Settings, 
     Lightbulb, 
-    GraduationCap  
+    GraduationCap,  
+    UsersRound
 } from "lucide-react"
 import {
     SiReact,
@@ -37,7 +38,8 @@ const categoryIcons: Record<string, React.ElementType> = {
     "database": Database,
     "tools": Settings,
     "concepts": Lightbulb,
-    "deepening": GraduationCap
+    "deepening": GraduationCap,
+    "softSkills": UsersRound
 }
 
 const tagIcons: Record<string, React.ElementType> = {
@@ -78,7 +80,12 @@ export const Skills = ({currentLanguage, layoutMode}: SkillsProps) => {
                     <section className={`
                     flex flex-col gap-2 rounded-2xl border bg-white/5 shadow-md backdrop-blur-sm
                     hover:border-violet-300/25 hover:bg-white/7 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300
-                    ${category.id === "deepening" ? 'border-dashed border-indigo-500/6' : 'border-white/10'}
+                    ${category.id === "deepening" 
+                        ? 'border-dashed border-indigo-500/20 bg-white/5 hover:border-indigo-400/40 hover:bg-indigo-500/5' 
+                        : category.id === "softSkills"
+                            ? 'border-dotted border-violet-400/30 bg-white/5 hover:border-violet-400/50 hover:bg-violet-500/5'
+                            : 'border-white/10 bg-white/5 hover:border-violet-300/25 hover:bg-white/7'
+                    }
                     ${
                         isMobile
                             ? "p-4 min-h-25"
