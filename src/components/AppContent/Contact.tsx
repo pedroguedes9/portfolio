@@ -86,7 +86,7 @@ export const Contact = ({currentLanguage, layoutMode}:ContactProps) => {
 
                 <a 
                 href="/curriculo.pdf" 
-                download="Pedro_Guedes_Curriculo.pdf"
+                download="Pedro_Chaves_Guedes_Curriculo.pdf"
                 className={`
                     font-medium text-white/90 bg-violet-600/10 border border-violet-500/40 rounded-lg
                     shadow-md shadow-transparent hover:shadow-violet-500/30 hover:bg-violet-600/30 hover:border-violet-400/20
