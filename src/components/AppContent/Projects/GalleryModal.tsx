@@ -22,18 +22,17 @@ export const GalleryModal = ({project, onClose, currentLanguage, layoutMode}:Gal
     const handleImageClick = (event: React.MouseEvent<HTMLImageElement>) => {
         if (isZoomed) {
             setIsZoomed(false)
-            setZoomOrigin("center center")
             return
         }
         
         const rect = event.currentTarget.getBoundingClientRect()
-
         const x = ((event.clientX - rect.left) / rect.width) * 100
         const y = ((event.clientY - rect.top) / rect.height) * 100
 
         setZoomOrigin(`${x}% ${y}%`)
         setIsZoomed(true)
     }
+
 
     const resetZoom = () => {
         setIsZoomed(false)
@@ -83,6 +82,11 @@ export const GalleryModal = ({project, onClose, currentLanguage, layoutMode}:Gal
                 stiffness: 260,
                 damping: 24
             } }
+            onAnimationComplete={() => {
+                if (!isZoomed) {
+                    setZoomOrigin("center center")
+                }
+            }}
             className={`
                 relative z-10 flex flex-col overflow-hidden bg-slate-950
                 ${
