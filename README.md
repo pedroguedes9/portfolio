@@ -123,10 +123,10 @@ Contato
 Pedro Chaves Guedes
 Desenvolvedor Full-Stack Júnior
 
-Portfólio: pedroguedes.dev.br
-GitHub: github.com/pedroguedes9
-LinkedIn: linkedin.com/in/pedroguedes9
-Email: pedro.guedes.mcz@gmail.com
+Portfólio: pedroguedes.dev.br;
+GitHub: github.com/pedroguedes9;
+LinkedIn: linkedin.com/in/pedroguedes9;
+Email: pedro.guedes.mcz@gmail.com;
 Status do projeto
 
 Projeto em desenvolvimento contínuo.
