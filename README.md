@@ -1,69 +1,143 @@
-# React + TypeScript + Vite
+# Pedro Guedes — Portfólio Full-Stack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Portfólio pessoal desenvolvido com foco em apresentar minha trajetória, habilidades, projetos e serviços como desenvolvedor Full-Stack.  
+O projeto foi construído com uma proposta visual inspirada em sistemas operacionais modernos, simulando uma experiência semelhante a um desktop no computador e a uma tela de aplicativos no mobile.
 
-Currently, two official plugins are available:
+🔗 **Acesse o projeto:** [pedroguedes.dev.br](https://pedroguedes.dev.br)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Preview
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+![Preview do portfólio](./images/portfolio-1.webp) 
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Sobre o projeto
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Este portfólio foi criado para ir além de uma página estática tradicional.  
+A ideia principal é oferecer uma experiência interativa, onde cada seção funciona como um aplicativo ou janela dentro de uma interface inspirada em ambientes como macOS e iOS.
+
+No desktop, o usuário navega por uma área de trabalho com Dock, janelas interativas, animações e seções organizadas como aplicações.  
+No mobile, a experiência foi adaptada para uma interface semelhante à tela inicial de um smartphone, com ícones de aplicativos e telas em fullscreen.
+
+---
+
+## Funcionalidades
+
+- Interface desktop inspirada em macOS;
+- Interface mobile inspirada em iPhone;
+- Dock interativa com ícones de navegação;
+- Janelas com abertura, fechamento, minimização, maximização e movimentação;
+- Layout responsivo com experiências diferentes para desktop e mobile;
+- Seções de Sobre mim, Habilidades, Projetos, Serviços e Contato;
+- Galeria de imagens para projetos;
+- Alternância entre português e inglês;
+- Link direto para GitHub;
+- Download de currículo;
+- Deploy com domínio personalizado.
+
+---
+
+## Tecnologias utilizadas
+
+- **React**
+- **TypeScript**
+- **Vite**
+- **Tailwind CSS**
+- **Motion / Framer Motion**
+- **Lucide React**
+- **React Icons**
+- **Vercel**
+
+---
+
+## Estrutura principal
+
+```txt
+src/
+├── components/
+│   ├── AppContent/
+│   ├── Desktop/
+│   ├── Mobile/
+│   ├── Wallpaper.tsx
+│   └── HeadlineReveal.tsx
+├── data/
+│   ├── apps.ts
+│   ├── projects.ts
+│   ├── skills.ts
+│   ├── services.ts
+│   ├── contact.ts
+│   └── translations.ts
+├── hooks/
+├── App.tsx
+└── main.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Principais aprendizados
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Durante o desenvolvimento deste projeto, aprofundei conhecimentos em:
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+organização de componentes reutilizáveis;
+gerenciamento de estado em interfaces interativas;
+responsividade avançada;
+animações com Motion;
+arquitetura visual para desktop e mobile;
+manipulação de layouts condicionais;
+deploy com Vercel;
+configuração de domínio personalizado;
+otimização de imagens e experiência do usuário.
+Como executar localmente
+
+Clone o repositório:
+
 ```
+git clone https://github.com/pedroguedes9/portfolio
+``` 
+Acesse a pasta do projeto:
+```
+cd NOME-DO-REPOSITORIO
+```
+Instale as dependências:
+```
+npm install
+```
+Execute o projeto:
+```
+npm run dev
+```
+Acesse no navegador:
+```
+http://localhost:5173
+```
+Build para produção
+```
+npm run build
+```
+Para visualizar o build localmente:
+```
+npm run preview
+```
+Deploy
+
+O projeto foi publicado na Vercel com domínio personalizado:
+
+🔗 pedroguedes.dev.br
+
+Contato
+
+Pedro Chaves Guedes
+Desenvolvedor Full-Stack Júnior
+
+Portfólio: pedroguedes.dev.br
+GitHub: github.com/pedroguedes9
+LinkedIn: linkedin.com/in/pedroguedes9
+Email: pedro.guedes.mcz@gmail.com
+Status do projeto
+
+Projeto em desenvolvimento contínuo.
+Novas melhorias, animações, otimizações e seções podem ser adicionadas futuramente.
+
+Licença
+
+Este projeto foi desenvolvido para fins pessoais e profissionais como portfólio.
