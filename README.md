@@ -7,12 +7,6 @@ O projeto foi construído com uma proposta visual inspirada em sistemas operacio
 
 ---
 
-## Preview
-
-[Preview do portfólio](./images/portfolio-1.webp) 
-
----
-
 ## Sobre o projeto
 
 Este portfólio foi criado para ir além de uma página estática tradicional.  
