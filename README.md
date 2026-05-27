@@ -9,7 +9,7 @@ O projeto foi construído com uma proposta visual inspirada em sistemas operacio
 
 ## Preview
 
-![Preview do portfólio](./images/portfolio-1.webp) 
+[Preview do portfólio](./images/portfolio-1.webp) 
 
 ---
 
