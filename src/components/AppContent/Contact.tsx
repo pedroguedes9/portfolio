@@ -36,7 +36,7 @@ export const Contact = ({currentLanguage, layoutMode}:ContactProps) => {
                     ? "flex min-h-full w-full flex-col gap-6 pb-6"
                     : isDesktopMaximized
                         ? "flex h-full max-w-6xl w-full flex-row items-center justify-between gap-10 p-10"
-                        : "flex h-full max-w-6xl w-full flex-col justify-center gap-4 px-4 -mt-10"
+                        : "flex h-full max-w-6xl w-full flex-col gap-4 px-4 pt-4"
             }
             }
         `}>

@@ -90,8 +90,8 @@ export const Skills = ({currentLanguage, layoutMode}: SkillsProps) => {
                         isMobile
                             ? "p-4 min-h-25"
                             : isDesktopMaximized
-                                ? "p-5 min-h-33.75"
-                                : "p-4 min-h-27.5"
+                                ? "p-5 min-h-33.75 last:col-span-3"
+                                : "p-4 min-h-27.5 last:col-span-2"
                     }
                     `} 
                     key={category.id}>

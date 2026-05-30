@@ -227,7 +227,7 @@ const AppWindow = ({title, onClose, children, containerRef, onMinimize, initialP
                         {title}
                     </h2>
                 </div>
-                <div className={`flex flex-col flex-1 overflow-y-auto justify-center items-center`}>
+                <div className={`flex flex-col flex-1 overflow-y-auto items-center`}>
                     {children}
                 </div>
             </motion.div>
