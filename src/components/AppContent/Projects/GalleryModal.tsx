@@ -210,7 +210,7 @@ export const GalleryModal = ({project, onClose, currentLanguage, layoutMode}:Gal
                     </motion.button>
                 </div>
                 <div className={`
-                    shrink-0 border-t border-white/10
+                    shrink-0 border-t border-white/10 
                     ${
                         isMobile
                             ? "px-3 py-3 gap-2"
@@ -224,7 +224,7 @@ export const GalleryModal = ({project, onClose, currentLanguage, layoutMode}:Gal
                         </p>
                     )}
                     <div className={`
-                        flex gap-2
+                        flex gap-2 justify-center
                         ${
                             isMobile
                                 ? "w-full overflow-x-auto px-1 pb-1 pt-1"
