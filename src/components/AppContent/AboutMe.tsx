@@ -16,8 +16,8 @@ export const AboutMe = ({currentLanguage, layoutMode}:AboutMeProps) => {
     
     const resumeButton = (
         <a
-        href="/curriculo.pdf" 
-        download="Pedro_Chaves_Guedes_Curriculo.pdf"
+        href={currentLanguage === "pt" ? "/curriculo.pdf" : "/curriculo-traduzido.pdf"}
+        download={currentLanguage === "pt" ? "Pedro_Chaves_Guedes_Curriculo.pdf" : "Pedro_Chaves_Guedes_Resume.pdf"}
         className={`
             font-medium text-white/90 bg-violet-600/10 border border-violet-500/40 rounded-lg
             shadow-md shadow-transparent hover:shadow-violet-500/30 hover:bg-violet-600/30 hover:border-violet-400/20
